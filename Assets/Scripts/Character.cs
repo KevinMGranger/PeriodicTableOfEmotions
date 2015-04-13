@@ -29,14 +29,18 @@ public class Character : MonoBehaviour
         posX = Input.GetAxis("Horizontal");
         posY = Input.GetAxis("Vertical");
 
+        // Set the vector
         Vector2 move = (new Vector2(posX, posY).normalized) * speed;
-        Vector2 slow = (new Vector2(posX, posY).normalized) * -speed;
+        //Vector2 slow = (new Vector2(posX, posY).normalized) * -speed;
+
+        // Move the rigidbody, using the vector
         rigidbody2D.AddForce(move, ForceMode2D.Impulse);
 
-        if (move == Vector2.zero)
-        {
-            rigidbody2D.velocity = slow;
-        }
+        //if (move == Vector2.zero)
+        //{
+        //    rigidbody2D.velocity = slow;
+        //}
+        // if the speed of the object goes over the maxspeed, set the speed to maxspeed.
         if (Mathf.Abs(rigidbody2D.velocity.x) >= maxSpeed)
         {
             rigidbody2D.velocity = new Vector2(maxSpeed * rigidbody.velocity.x, rigidbody.velocity.y);
