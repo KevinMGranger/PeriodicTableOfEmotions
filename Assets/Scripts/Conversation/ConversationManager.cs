@@ -28,13 +28,23 @@ public class ConversationManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        setUI(conversationTree);
 	}
 
-    void OnEnable()
+    public void StartConvo()
     {
         box.gameObject.SetActive(true);
+        box.Active = true;
         buttonMenu.gameObject.SetActive(true);
+        setUI(conversationTree);
+    }
+
+    public void EndConvo()
+    {
+        box.Active = false;
+        clearDialogChildren();
+
+        box.gameObject.SetActive(false);
+        buttonMenu.gameObject.SetActive(false);
     }
 	
 	// Update is called once per frame

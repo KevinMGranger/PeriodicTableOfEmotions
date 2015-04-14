@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using ResponseTree = System.Collections.Generic.Dictionary<ConversationChoice, ConversationPoint>;
 
 public class AtomNPC : MonoBehaviour {
 
@@ -31,8 +32,11 @@ public class AtomNPC : MonoBehaviour {
 	// Instance of the player
 	public Character player;
 
-	// Use this for initialization
-	void Start () {
+    public ConversationPoint convo;
+
+    public ConversationManager convoManager;
+
+	void Awake () {
         // find the script and allow me to check for collision
         //zone = GameObject.Find("InteractionZone").GetComponent<ZoneCheck>();
 		zone = gameObject.transform.GetChild(0).GetComponent<ZoneCheck>();
@@ -57,7 +61,17 @@ public class AtomNPC : MonoBehaviour {
 		{
 			attribute += ", Hates Video Games";
 		}
+
+        convo = new ConversationPoint("Hey! I'm " + name + "!\nHere's some facts about me:\n" + attribute,
+            new ResponseTree {
+                { new ConversationChoice("Cool story bro"), new LastWord("Press F to add me to the match list!") }
+            }
+            );
+
+        convoManager = GameObject.Find("Conversation Manager").GetComponent<ConversationManager>();
 	}
+
+    void Start() { }
 	
 	// Update is called once per frame
 	void Update () {
@@ -66,6 +80,8 @@ public class AtomNPC : MonoBehaviour {
         {
 			if(playerAttention == false)
 			{
+                convoManager.conversationTree = convo;
+                convoManager.StartConvo();
 				Debug.Log(npcName + ":'Hello, Adom!'");
 				if(inMatchList == false)
 				{
@@ -87,6 +103,7 @@ public class AtomNPC : MonoBehaviour {
         // if not, then don't do anything right now.
 		else if(playerAttention == true)
         {
+            convoManager.EndConvo();
             Debug.Log(npcName + ": Goodbye!");
 			playerAttention = false;
         }

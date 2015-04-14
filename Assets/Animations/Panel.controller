@@ -109,7 +109,7 @@ StateMachine:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Base Layer
-  m_DefaultState: {fileID: 110236878}
+  m_DefaultState: {fileID: 110234572}
   m_States:
   - {fileID: 110234572}
   - {fileID: 110236878}
