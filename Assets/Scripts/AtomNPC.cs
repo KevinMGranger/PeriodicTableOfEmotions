@@ -32,6 +32,7 @@ public class AtomNPC : MonoBehaviour {
 	// Instance of the player
 	public Character player;
 
+    // Conversation Manager
     public ConversationPoint convo;
 
     public ConversationManager convoManager;
@@ -40,6 +41,7 @@ public class AtomNPC : MonoBehaviour {
         // find the script and allow me to check for collision
         //zone = GameObject.Find("InteractionZone").GetComponent<ZoneCheck>();
 		zone = gameObject.transform.GetChild(0).GetComponent<ZoneCheck>();
+        // player matching
 		playerAttention = false;
 		isMatched = false;
 		inMatchList = false;
@@ -71,7 +73,7 @@ public class AtomNPC : MonoBehaviour {
         convoManager = GameObject.Find("Conversation Manager").GetComponent<ConversationManager>();
 	}
 
-    void Start() { }
+    void Start(){}
 	
 	// Update is called once per frame
 	void Update () {

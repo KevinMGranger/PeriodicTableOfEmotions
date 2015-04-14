@@ -54,11 +54,11 @@ public class Character : MonoBehaviour
         	Movement();
 
 			// Enters the player into the Matching state
-			if(Input.GetKeyDown(KeyCode.G))
+			if(Input.GetKeyDown(KeyCode.F))
 			{
-				Debug.Log("Type the Number of the player you want to Match. Press G again to cancel.");
+				Debug.Log("Type the Number of the player you want to Match. Press F again to cancel.");
 				for(int i = 0; i < matchList.Length; i++)
-				{
+				{ 
 					Debug.Log("" + (i+1) + ". " + matchList[i].npcName + ": " + matchList[i].attribute);
 				}
 				playerState = PlayerState.matching;
@@ -72,7 +72,7 @@ public class Character : MonoBehaviour
 			// Call the Match method
 			Match ();
 
-			// If 'G' is pressed while matching, exit the matching process
+			// If 'F' is pressed while matching, exit the matching process
 			if(Input.GetKeyDown(KeyCode.G))
 			{
 				Debug.Log("Stopped Matching. Walk Around Now.");
