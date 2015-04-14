@@ -3,8 +3,12 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-using ResponseTree = System.Collections.Generic.Dictionary<ConversationChoice, ConversationPoint>;
-
+/// <summary>
+/// A conversation manager hooks up a conversation tree
+/// to its respective UI components (a RectTransform to hold responses,
+/// and a DialogBox to hold the text.)
+/// Those should probably be split out a bit more but WHATEVS LOLS
+/// </summary>
 public class ConversationManager : MonoBehaviour {
 
     public RectTransform buttonMenu;
@@ -13,6 +17,8 @@ public class ConversationManager : MonoBehaviour {
 
     public DialogBox box;
 
+	// this is to kick off PopulateExampleConvo from the UI
+	// since you can't show a dictionary in the inspector easily
     public bool demoMode;
 
     [ContextMenuItem("Populate with example conversation", "PopulateExampleConvo")]
@@ -36,10 +42,13 @@ public class ConversationManager : MonoBehaviour {
         box.Active = true;
         buttonMenu.gameObject.SetActive(true);
         setUI(conversationTree);
+
     }
 
     public void EndConvo()
     {
+		conversationTree.onClosedText.Invoke();
+
         box.Active = false;
         clearDialogChildren();
 
@@ -54,7 +63,11 @@ public class ConversationManager : MonoBehaviour {
 
     void setUI(ConversationPoint newPoint)
     {
+		conversationTree.onClosedText.Invoke();
+
         box.Text = newPoint.ToString();
+
+		conversationTree.onPresentText.Invoke();
 
         clearDialogChildren();
 
@@ -82,12 +95,12 @@ public class ConversationManager : MonoBehaviour {
         conversationTree = new ConversationPoint(
             "Is my electron kawaiiiiii~~~~~",
             new ResponseTree {
-                { new ConversationChoice("Of course!"), new LastWord("Yay!") },
-                { new ConversationChoice("...no."), new LastWord("Aww. You're mean.") }
+                { "Of course!", new ConversationPoint("Yay!") },
+                { "...no.", new ConversationPoint("Aww. You're mean.") }
             });
     }
 
-    public void ConversationChoiceSelected(ConversationChoice choice)
+    public void ChoiceSelected(string choice)
     {
         ConversationPoint next;
         var found = conversationTree.getNextPointFromResponse(choice, out next);

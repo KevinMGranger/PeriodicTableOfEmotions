@@ -7,14 +7,12 @@ public class ResponseButton : MonoBehaviour {
     Button btn;
     Text txt;
 
-    ConversationChoice response;
-    public ConversationChoice Response
+    public string Response
     {
-        get { return response; }
+        get { return txt.text; }
         set
         {
-            response = value;
-            txt.text = value.text;
+            txt.text = value;
         }
     }
 
@@ -42,6 +40,6 @@ public class ResponseButton : MonoBehaviour {
 
     void Clicked()
     {
-        Manager.ConversationChoiceSelected(response);
+        Manager.ChoiceSelected(txt.text);
     }
 }
