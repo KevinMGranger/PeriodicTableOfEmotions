@@ -89,8 +89,6 @@ public class AtomNPC : MonoBehaviour {
         {
 			if(playerAttention == false)
 			{
-                convoManager.conversationTree = convo;
-                convoManager.StartConvo();
 				//Debug.Log(npcName + ":'Hello, Adom!'");
 				if(inMatchList == false)
 				{
@@ -107,6 +105,12 @@ public class AtomNPC : MonoBehaviour {
 					player.AddToMatchList(this);
            	   	  	atomicCharge++;
            		}
+				if(Input.GetKeyDown(KeyCode.E))
+				{
+					convoManager.conversationTree = convo;
+					convoManager.StartConvo();
+
+				}
 			}
         }
         // if not, then don't do anything right now.
