@@ -84,7 +84,7 @@ public class AtomNPC : MonoBehaviour {
 			{
                 convoManager.conversationTree = convo;
                 convoManager.StartConvo();
-				Debug.Log(npcName + ":'Hello, Adom!'");
+				//Debug.Log(npcName + ":'Hello, Adom!'");
 				if(inMatchList == false)
 				{
 					Debug.Log("Press F to add to Match List!");
@@ -106,7 +106,7 @@ public class AtomNPC : MonoBehaviour {
 		else if(playerAttention == true)
         {
             convoManager.EndConvo();
-            Debug.Log(npcName + ": Goodbye!");
+            //Debug.Log(npcName + ": Goodbye!");
 			playerAttention = false;
         }
 	}

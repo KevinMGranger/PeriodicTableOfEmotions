@@ -54,15 +54,22 @@ public class Character : MonoBehaviour
         	Movement();
 
 			// Enters the player into the Matching state
-			if(Input.GetKeyDown(KeyCode.F))
+			if(Input.GetKeyDown(KeyCode.G))
 			{
-				Debug.Log("Type the Number of the player you want to Match. Press F again to cancel.");
-				for(int i = 0; i < matchList.Length; i++)
-				{ 
-					Debug.Log("" + (i+1) + ". " + matchList[i].npcName + ": " + matchList[i].attribute);
+				if(matchList[3] != null)
+				{
+					Debug.Log("Type the Number of the player you want to Match. Press G again to cancel.");
+					for(int i = 0; i < matchList.Length; i++)
+					{ 
+						Debug.Log("" + (i+1) + ". " + matchList[i].npcName + ": " + matchList[i].attribute);
+					}
+					playerState = PlayerState.matching;
+					matchingState = MatchingState.selection1;
 				}
-				playerState = PlayerState.matching;
-				matchingState = MatchingState.selection1;
+				else
+				{
+					Debug.Log("You haven't added everyone to your match list!");
+				}
 			}
 		}
 
@@ -175,6 +182,7 @@ public class Character : MonoBehaviour
 				// Remove them from THE LIST
 				playerState = PlayerState.walking;
 				matchingState = MatchingState.notMatching;
+				Debug.Log("Stopped Matching. Walk Around Now.");
 			}
 			if(Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Alpha2))
 			{
@@ -187,6 +195,7 @@ public class Character : MonoBehaviour
 				// Remove them from THE LIST
 				playerState = PlayerState.walking;
 				matchingState = MatchingState.notMatching;
+				Debug.Log("Stopped Matching. Walk Around Now.");
 			}
 			if(Input.GetKeyDown(KeyCode.Keypad3) || Input.GetKeyDown(KeyCode.Alpha3))
 			{
@@ -199,6 +208,7 @@ public class Character : MonoBehaviour
 				// Remove them from THE LIST
 				playerState = PlayerState.walking;
 				matchingState = MatchingState.notMatching;
+				Debug.Log("Stopped Matching. Walk Around Now.");
 			}
 			if(Input.GetKeyDown(KeyCode.Keypad4) || Input.GetKeyDown(KeyCode.Alpha4))
 			{
@@ -211,6 +221,7 @@ public class Character : MonoBehaviour
 				// Remove them from THE LIST
 				playerState = PlayerState.walking;
 				matchingState = MatchingState.notMatching;
+				Debug.Log("Stopped Matching. Walk Around Now.");
 			}
 		}
 	}
