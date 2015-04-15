@@ -1,3 +1,3 @@
-# Periodic Table of Emotions
+# Chemistry
 
 Final game. No coffee. Unity only.

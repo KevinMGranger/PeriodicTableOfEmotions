@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using ResponseTree = System.Collections.Generic.Dictionary<ConversationChoice, ConversationPoint>;
 
 public class AtomNPC : MonoBehaviour {
 
@@ -66,7 +65,7 @@ public class AtomNPC : MonoBehaviour {
 
         convo = new ConversationPoint("Hey! I'm " + name + "!\nHere's some facts about me:\n" + attribute,
             new ResponseTree {
-                { new ConversationChoice("Cool story bro"), new LastWord("Press F to add me to the match list!") }
+                { "Cool story bro", new ConversationPoint("Press F to add me to the match list!") }
             }
             );
 
