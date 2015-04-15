@@ -6,6 +6,9 @@ public class AtomNPC : MonoBehaviour {
     // holds the charge of the NPC
     public int atomicCharge =  0;
 
+	// The NPC's trust towards the player
+	public int trustPoints = 0;
+
     // Get ZoneCheck's GameObject
     public ZoneCheck zone;
 
@@ -63,11 +66,16 @@ public class AtomNPC : MonoBehaviour {
 			attribute += ", Hates Video Games";
 		}
 
-        convo = new ConversationPoint("Hey! I'm " + name + "!\nHere's some facts about me:\n" + attribute,
+        convo = new ConversationPoint ("Hey! I'm " + name + "!\nHere's some facts about me:\n" + attribute,
             new ResponseTree {
-                { "Cool story bro", new ConversationPoint("Press F to add me to the match list!") }
-            }
-            );
+                { "Cool story bro", new ConversationPoint("I don't think I trust you quite yet. Do you want to try to gain my trust?", 
+				new ResponseTree{ 
+					{"Sure!", new ConversationPoint("Okay cool! Here's your first question: Who is the father of Chemistry?",
+						  new ResponseTree{
+							{"Queen Elizabeth II", new ConversationPoint("She's too busy ruling England")},
+							{"Freddy Mercury", new ConversationPoint("Yeah sure, let's go with that")},
+							{"Sir Francis Drake", new ConversationPoint("No, I think not")}
+					})}})}});
 
         convoManager = GameObject.Find("Conversation Manager").GetComponent<ConversationManager>();
 	}
