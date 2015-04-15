@@ -78,8 +78,16 @@ public class AtomNPC : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         // if the player is colliding with the zone, allow him to interact with the NPC
-        if (zone.collides == true)
+        if (zone.collides == true && !isMatched)
         {
+			if(player.tryGrab && !player.grabbing)
+			{
+				this.gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
+				player.grabbedNPC = this;
+				player.tryGrab = false;
+				player.grabbing = true;
+			}
+
 			if(playerAttention == false)
 			{
                 convoManager.conversationTree = convo;
@@ -87,7 +95,7 @@ public class AtomNPC : MonoBehaviour {
 				//Debug.Log(npcName + ":'Hello, Adom!'");
 				if(inMatchList == false)
 				{
-					Debug.Log("Press F to add to Match List!");
+					//Debug.Log("Press F to add to Match List!");
 				}
 				playerAttention = true;
 			}
@@ -109,6 +117,42 @@ public class AtomNPC : MonoBehaviour {
             //Debug.Log(npcName + ": Goodbye!");
 			playerAttention = false;
         }
+
+		if(zone.hitsNPC)
+		{
+			FormBond();
+		}
+
+		if(player.grabbedNPC == this)
+		{
+			FollowPlayer();
+		}
+		else
+		{
+			this.gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
+		}
+	}
+
+	// Follow the player around
+	private void FollowPlayer()
+	{
+		// Follow the player here
+		if((Vector3.Distance(this.transform.position, player.GetGameObject().transform.position)) > 1.7f)
+		{
+			Quaternion startingRotation = transform.rotation;
+			transform.LookAt(player.transform.position);
+			transform.Translate(Vector3.forward * 0.1f);
+			transform.rotation = startingRotation;
+		}
+
+	}
+
+	private void FormBond()
+	{
+		isMatched = true;
+		player.grabbedNPC = null;
+		player.grabbing = false;
+		this.gameObject.GetComponent<MeshRenderer>().material.color = new Color(255.0f, 135.0f, 135.0f);
 	}
 
 	// Check to see if the match this has been 
