@@ -27,11 +27,15 @@ public class Character : MonoBehaviour
 	public AtomNPC[] matchList;
 
 	// Match Choice
-	public AtomNPC firstMatchChoice;
+	public AtomNPC grabbedNPC;
 
     // grab Object's positions.
     public float posX;
     public float posY;
+
+	// Grabbing booleans
+	public bool tryGrab;
+	public bool grabbing;
 
 	// States of the player
 	public PlayerState playerState;
@@ -48,6 +52,10 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		if(tryGrab)
+		{
+			tryGrab = false;
+		}
 		// If the player state is walking...
 		if(playerState == PlayerState.walking)
 		{
@@ -56,6 +64,16 @@ public class Character : MonoBehaviour
 			// Enters the player into the Matching state
 			if(Input.GetKeyDown(KeyCode.G))
 			{
+				if(grabbing)
+				{
+					grabbing = false;
+					grabbedNPC = null;
+				}
+				else
+				{
+					tryGrab = true;
+				}
+				/*
 				if(matchList[3] != null)
 				{
 					Debug.Log("Type the Number of the player you want to Match. Press G again to cancel.");
@@ -70,6 +88,7 @@ public class Character : MonoBehaviour
 				{
 					Debug.Log("You haven't added everyone to your match list!");
 				}
+				*/
 			}
 		}
 
@@ -79,13 +98,15 @@ public class Character : MonoBehaviour
 			// Call the Match method
 			Match ();
 
-			// If 'F' is pressed while matching, exit the matching process
+			/*
+			// If 'G' is pressed while matching, exit the matching process
 			if(Input.GetKeyDown(KeyCode.G))
 			{
 				Debug.Log("Stopped Matching. Walk Around Now.");
 				playerState = PlayerState.walking;
 				matchingState = MatchingState.notMatching;
 			}
+			*/
 		}
     }
 
@@ -131,110 +152,20 @@ public class Character : MonoBehaviour
 		}
 	}
 
+	// Obsolete methods, here for now
 	// This method matches two NPCs of the player's choice
 	// It also gives them a score out of 4 on the match (To be flushed out later)
 	private void Match()
 	{
-		// First step in matching, choose the first matchee with the number keys
-		if(matchingState == MatchingState.selection1)
-		{
-			if(Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha1))
-			{
-				Debug.Log("Type the Number of the player you want to Match. Press G to cancel.");
-				firstMatchChoice = matchList[0];
-				ShowSecondMatchChoices (0);
-				matchingState = MatchingState.selection2;
-			}
-			if(Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Alpha2))
-			{
-				Debug.Log("Type the Number of the player you want to Match. Press G to cancel.");
-				firstMatchChoice = matchList[1];
-				ShowSecondMatchChoices (1);
-				matchingState = MatchingState.selection2;
-			}
-			if(Input.GetKeyDown(KeyCode.Keypad3) || Input.GetKeyDown(KeyCode.Alpha3))
-			{
-				Debug.Log("Type the Number of the player you want to Match. Press G to cancel.");
-				firstMatchChoice = matchList[2];
-				ShowSecondMatchChoices (2);
-				matchingState = MatchingState.selection2;
-			}
-			if(Input.GetKeyDown(KeyCode.Keypad4) || Input.GetKeyDown(KeyCode.Alpha4))
-			{
-				Debug.Log("Type the Number of the player you want to Match. Press G to cancel.");
-				firstMatchChoice = matchList[3];
-				ShowSecondMatchChoices (3);
-				matchingState = MatchingState.selection2;
-			}
-		}
-
-		// Second part of matching, choose the second person
-		else if(matchingState == MatchingState.selection2)
-		{
-			if(Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha1))
-			{
-				// Call the choice Match Method
-				int matchGrade1 = firstMatchChoice.CheckMatch(matchList[0]);
-				int matchGrade2 = matchList[0].CheckMatch(firstMatchChoice);
-				int matchGradeFinal = matchGrade1 + matchGrade2;
-				Debug.Log("Your grade for matching " + firstMatchChoice.npcName + " and " + matchList[0].npcName + " is " + matchGradeFinal.ToString () + "/4");
-
-				// Remove them from THE LIST
-				playerState = PlayerState.walking;
-				matchingState = MatchingState.notMatching;
-				Debug.Log("Stopped Matching. Walk Around Now.");
-			}
-			if(Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Alpha2))
-			{
-				// Call the choice Match Method
-				int matchGrade1 = firstMatchChoice.CheckMatch(matchList[1]);
-				int matchGrade2 = matchList[1].CheckMatch(firstMatchChoice);
-				int matchGradeFinal = matchGrade1 + matchGrade2;
-				Debug.Log("Your grade for matching " + firstMatchChoice.npcName + " and " + matchList[1].npcName + " is " + matchGradeFinal.ToString () + "/4");
-
-				// Remove them from THE LIST
-				playerState = PlayerState.walking;
-				matchingState = MatchingState.notMatching;
-				Debug.Log("Stopped Matching. Walk Around Now.");
-			}
-			if(Input.GetKeyDown(KeyCode.Keypad3) || Input.GetKeyDown(KeyCode.Alpha3))
-			{
-				// Call the choice Match Method
-				int matchGrade1 = firstMatchChoice.CheckMatch(matchList[2]);
-				int matchGrade2 = matchList[2].CheckMatch(firstMatchChoice);
-				int matchGradeFinal = matchGrade1 + matchGrade2;
-				Debug.Log("Your grade for matching " + firstMatchChoice.npcName + " and " + matchList[2].npcName + " is " + matchGradeFinal.ToString () + "/4");
-
-				// Remove them from THE LIST
-				playerState = PlayerState.walking;
-				matchingState = MatchingState.notMatching;
-				Debug.Log("Stopped Matching. Walk Around Now.");
-			}
-			if(Input.GetKeyDown(KeyCode.Keypad4) || Input.GetKeyDown(KeyCode.Alpha4))
-			{
-				// Call the choice Match Method
-				int matchGrade1 = firstMatchChoice.CheckMatch(matchList[3]);
-				int matchGrade2 = matchList[3].CheckMatch(firstMatchChoice);
-				int matchGradeFinal = matchGrade1 + matchGrade2;
-				Debug.Log("Your grade for matching " + firstMatchChoice.npcName + " and " + matchList[3].npcName + " is " + matchGradeFinal.ToString () + "/4");
-
-				// Remove them from THE LIST
-				playerState = PlayerState.walking;
-				matchingState = MatchingState.notMatching;
-				Debug.Log("Stopped Matching. Walk Around Now.");
-			}
-		}
 	}
 
 	// Shows the player the next set of choices when matching
 	private void ShowSecondMatchChoices(int initialChoice)
 	{
-		for(int i = 0; i < matchList.Length; i++)
-		{
-			if(i != initialChoice)
-			{
-				Debug.Log("" + (i+1) + ". " + matchList[i].npcName + ": " + matchList[i].attribute);
-			}
-		}
+	}
+
+	public GameObject GetGameObject()
+	{
+		return gameObject;
 	}
 }
