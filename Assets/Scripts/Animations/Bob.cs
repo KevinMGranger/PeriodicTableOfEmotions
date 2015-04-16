@@ -7,9 +7,6 @@ public class Bob : MonoBehaviour
 
 	public float period;
 
-	[ContextMenuItem("Reset offset to half-height", "SetOffsetToBottom")]
-	public float offset;
-
 	[HideInInspector]
 	public Vector3 startingPosition;
 
@@ -43,9 +40,9 @@ public class Bob : MonoBehaviour
 	{
 		DrawLines();
 		float theta = (Mathf.PI * 2) * (Time.time / period);
-		float amplitude = sinusoidalFunctionDel(theta);
-		float ampWithMag = magnitude * amplitude;
-		float y = startingPosition.y + ampWithMag;
+		float rawAmplitude = sinusoidalFunctionDel(theta);
+		float ampWithMag = magnitude * rawAmplitude;
+		float y = startingPosition.y + magnitude + ampWithMag;
 
 		setY(y);
 	}
@@ -69,11 +66,5 @@ public class Bob : MonoBehaviour
 		right.x += transform.localScale.x;
 
 		Debug.DrawLine(left, right, Color.red);
-	}
-
-	[ContextMenu("Reset offset to half-height")]
-	void SetOffsetToBottom()
-	{
-		offset = transform.localScale.y / 2;
 	}
 }
