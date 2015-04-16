@@ -17,12 +17,19 @@ public class ConversationManager : MonoBehaviour {
 
     public DialogBox box;
 
+    public string chosen;
+
 	// this is to kick off PopulateExampleConvo from the UI
 	// since you can't show a dictionary in the inspector easily
     public bool demoMode;
 
     [ContextMenuItem("Populate with example conversation", "PopulateExampleConvo")]
     public ConversationPoint conversationTree;
+
+    public string GetText()
+    {
+        return chosen;
+    }
 
     void Awake()
     {
@@ -102,6 +109,7 @@ public class ConversationManager : MonoBehaviour {
 
     public void ChoiceSelected(string choice)
     {
+        chosen = choice;
         ConversationPoint next;
         var found = conversationTree.getNextPointFromResponse(choice, out next);
 

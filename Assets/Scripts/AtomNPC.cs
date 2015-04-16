@@ -9,8 +9,14 @@ public class AtomNPC : MonoBehaviour {
 	// The NPC's trust towards the player
 	public int trustPoints = 0;
 
+    // Image Loader, brought in from the seperate script (Made no sense to have a seperate script to load all images atm)
+    public GameObject npcImage;
+
     // Get ZoneCheck's GameObject
     public ZoneCheck zone;
+
+    // Check Conversation cycle
+    public bool changeConversation;
 
 	// Name of the NPC
 	public string npcName;
@@ -34,15 +40,25 @@ public class AtomNPC : MonoBehaviour {
 	// Instance of the player
 	public Character player;
 
+    // A prompt for the player
+    public GameObject GPrompt;
+    public GameObject EPrompt;
+
     // Conversation Manager
     public ConversationPoint convo;
+    public ConversationPoint convo2;
 
     public ConversationManager convoManager;
+
+    // quiz variables
+    public string choice;
+    public bool correct = false;
 
 	void Awake () {
         // find the script and allow me to check for collision
         //zone = GameObject.Find("InteractionZone").GetComponent<ZoneCheck>();
 		zone = gameObject.transform.GetChild(0).GetComponent<ZoneCheck>();
+        changeConversation = false;
         // player matching
 		playerAttention = false;
 		isMatched = false;
@@ -66,7 +82,7 @@ public class AtomNPC : MonoBehaviour {
 			attribute += ", Hates Video Games";
 		}
 
-        convo = new ConversationPoint ("Hey! I'm " + name + "!\nHere's some facts about me:\n" + attribute,
+        convo = new ConversationPoint ("Hey! I'm " + npcName + "!\nHere's some facts about me:\n" + attribute,
             new ResponseTree {
                 { "Cool story bro", new ConversationPoint("I don't think I trust you quite yet. Do you want to try to gain my trust?", 
 				new ResponseTree{ 
@@ -76,14 +92,20 @@ public class AtomNPC : MonoBehaviour {
 							{"Freddy Mercury", new ConversationPoint("Yeah sure, let's go with that")},
 							{"Sir Francis Drake", new ConversationPoint("No, I think not")}
 					})}})}});
+        convo2 = new ConversationPoint("Hey Adom!! How's it going?",
+              new ResponseTree {
+                { "Hi " + npcName, new ConversationPoint("Since you passed my quiz, i'll just give you my information:\n " + attribute)}
+              });
 
         convoManager = GameObject.Find("Conversation Manager").GetComponent<ConversationManager>();
+
 	}
 
     void Start(){}
 	
 	// Update is called once per frame
 	void Update () {
+        choice = convoManager.GetText();
         // if the player is colliding with the zone, allow him to interact with the NPC
         if (zone.collides == true && !isMatched)
         {
@@ -106,6 +128,17 @@ public class AtomNPC : MonoBehaviour {
 			}
 			else
 			{
+                EPrompt.gameObject.SetActive(true);
+                if (trustPoints >= 5)
+                {
+                    EPrompt.gameObject.SetActive(false);
+                    GPrompt.gameObject.SetActive(true);
+                }
+                if (player.grabbing == true)
+                {
+                    GPrompt.gameObject.SetActive(false);
+                }
+                // handles quite literally the whole conversation system now.
             	//Debug.Log("Charge: " + atomicCharge);
             	if(Input.GetKeyDown(KeyCode.F) && inMatchList == false)
             	{
@@ -115,15 +148,26 @@ public class AtomNPC : MonoBehaviour {
            		}
 				if(Input.GetKeyDown(KeyCode.E))
 				{
-					convoManager.conversationTree = convo;
-					convoManager.StartConvo();
-
+                    if (trustPoints >= 1)
+                    {
+                        npcImage.gameObject.SetActive(true);
+                        convoManager.conversationTree = convo2;
+                        convoManager.StartConvo();
+                    }
+                    else
+                    {
+                        npcImage.gameObject.SetActive(true);
+                        convoManager.conversationTree = convo;
+                        convoManager.StartConvo();
+                    }
 				}
 			}
         }
         // if not, then don't do anything right now.
 		else if(playerAttention == true)
         {
+            EPrompt.gameObject.SetActive(false);
+            npcImage.gameObject.SetActive(false);
             convoManager.EndConvo();
             //Debug.Log(npcName + ": Goodbye!");
 			playerAttention = false;
@@ -142,6 +186,16 @@ public class AtomNPC : MonoBehaviour {
 		{
 			this.gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
 		}
+        // if the choice is freddy mercury, raise trust points
+        if (choice == "Freddy Mercury" && correct == false)
+        {
+            correct = true;
+        }
+        if (correct == true)
+        {
+            //Debug.Log(npcName + trustPoints);
+            this.trustPoints++;
+        }
 	}
 
 	// Follow the player around
