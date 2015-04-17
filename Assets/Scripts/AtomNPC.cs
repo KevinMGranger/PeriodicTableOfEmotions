@@ -12,6 +12,9 @@ public class AtomNPC : MonoBehaviour {
     // Image Loader, brought in from the seperate script (Made no sense to have a seperate script to load all images atm)
     public GameObject npcImage;
 
+	// Check Dialogue
+	public bool isDialogueOpen;
+
     // Get ZoneCheck's GameObject
     public ZoneCheck zone;
 
@@ -85,34 +88,35 @@ public class AtomNPC : MonoBehaviour {
 			attribute += ", Hates Video Games";
 		}
 
-        convo = new ConversationPoint ("Hey! I'm " + npcName + "!\nHere's some facts about me:\n" + attribute,
+        convo = new ConversationPoint ("Hey! I'm " + npcName,
             new ResponseTree {
                 { "Cool story bro", new ConversationPoint("I don't think I trust you quite yet. Do you want to try to gain my trust?", 
 				new ResponseTree{ 
-					{"Sure!", new ConversationPoint("Okay cool! Here's your first question: Who is the father of Chemistry?",
+					{"Sure!", new ConversationPoint("Okay cool! Here's your first question: Who is the father of modern Chemistry?",
 						  new ResponseTree{
 							{"Queen Elizabeth II", new ConversationPoint("She's too busy ruling England")},
-							{"Freddy Mercury", new ConversationPoint("Yeah sure, let's go with that")},
-							{"Sir Francis Drake", new ConversationPoint("No, I think not")}
+							{"Sir Francis Drake", new ConversationPoint("No, I think not")},
+							{"Antoine Lavoisier", new ConversationPoint("He is widely considered the founder of Modern Chemistry. You're correct!",
+								new ResponseTree{
+									{"Awesome!", new ConversationPoint("Okay now on to the real thing",
+										new ResponseTree{
+										{"Let's do this",new ConversationPoint("What is an atom composed of?",
+											    new ResponseTree{ 
+												{"Bits, Bytes, and Gigabytes", new ConversationPoint("No, the anwer would be Protons, Neutrons, and Electrons.")},
+												{"Potatoes. Lots of Potatoes", new ConversationPoint("No.")},
+												{"Protons, Electrons, and Neutrons", new ConversationPoint("That's Correct! Now what is the definition of chemistry?", 
+													    new ResponseTree{
+														{"Romance!!!", new ConversationPoint("Yes!!! But also no!!")},
+														{"Study of Matter", new ConversationPoint("Yeah, that's basically it!")},
+														{"The study of kittens", new ConversationPoint ("You're not on the same page as me are you?")}
+
 					//})}})}});
-						})}})}});
+					})}})}})}})}})}})}});
         convoTrust = new ConversationPoint("Hey Adom!! How's it going?",
               new ResponseTree {
                 { "Hi " + npcName, new ConversationPoint("Since you passed my quiz, i'll just give you my information:\n " + attribute)}
               });
 
-		convoQuiz = new ConversationPoint ("Okay now on to the real thing.",
-		      		new ResponseTree {
-				{ "Let's do this", new ConversationPoint("What is an atom composed of?", 
-				         new ResponseTree{ 
-							{"Bits, Bytes, and Gigabytes", new ConversationPoint("No, the anwer would be Protons, Neutrons, and Electrons.")},
-							{"Potatoes. Lots of Potatoes", new ConversationPoint("No.")},
-							{"Protons, Electrons, and Neutrons", new ConversationPoint("That's Correct! Now what is the definition of chemistry?", 
-								new ResponseTree{
-								{"Romance!!!", new ConversationPoint("Yes!!! But also no!!")},
-								{"Study of Matter", new ConversationPoint("Yeah, that's basically it!")},
-								{"The study of kittens", new ConversationPoint ("You're not on the same page as me are you?")}
-					})}})}});
 
         convoManager = GameObject.Find("Conversation Manager").GetComponent<ConversationManager>();
 
@@ -166,16 +170,11 @@ public class AtomNPC : MonoBehaviour {
            		}
 				if(Input.GetKeyDown(KeyCode.E))
 				{
-					if(trustPoints >= 3)
-					{
-						npcImage.gameObject.SetActive(true);
-						convoManager.conversationTree = convoTrust;
-						convoManager.StartConvo();
-					}
-                    else if (trustPoints >= 1)
+					isDialogueOpen = true;
+                    if (trustPoints >= 3)
                     {
                         npcImage.gameObject.SetActive(true);
-						convoManager.conversationTree = convoQuiz;
+						convoManager.conversationTree = convoTrust;
                         convoManager.StartConvo();
                     }
                     else
@@ -185,41 +184,30 @@ public class AtomNPC : MonoBehaviour {
                         convoManager.StartConvo();
                     }
 				}
+				if(Input.GetKeyDown(KeyCode.Escape))
+				{
+					isDialogueOpen = false;
+					convoManager.EndConvo();
+					npcImage.gameObject.SetActive(false);
+				}
 			}
-
-			// if the choice is freddy mercury, raise trust points
-			if (choice == "Freddy Mercury" && correct == false)
-			{
-				correct = true;
-			}
-			if(choice == "Protons, Electrons, and Neutrons" && correct == false)
-			{
-				correct = true;
-			}
-			if(choice == "Study of Matter" && correct == false)
-			{
-				correct = true;
-			}
-			// also set the conversation nmananger to null to keep it from infinitely looping.
-			if (correct == true)
-			{
-				Debug.Log(this.gameObject.GetComponent<AtomNPC>().npcName + " trust: "  + (trustPoints + 1));
-				this.gameObject.GetComponent<AtomNPC>().trustPoints++;
-				correct = !correct;
-				convoManager.chosen = null;
-			}
+			CheckQuiz ();
         }
         // if not in zone, then don't do anything right now.
 		else if(playerAttention == true)
         {
             EPrompt.gameObject.SetActive(false);
             npcImage.gameObject.SetActive(false);
-            convoManager.EndConvo();
+			if(isDialogueOpen == true)
+			{
+            	convoManager.EndConvo();
+				isDialogueOpen = false;
+			}
             //Debug.Log(npcName + ": Goodbye!");
 			playerAttention = false;
         }
 
-		if(zone.hitsNPC)
+		if(zone.hitsNPC && isMatched == false)
 		{
 			FormBond();
 		}
@@ -274,4 +262,33 @@ public class AtomNPC : MonoBehaviour {
 		}
 		return grade;
 	}
+	public void CheckQuiz()
+	{
+		// if the choice is freddy mercury, raise trust points
+		if (choice == "Antoine Lavoisier" && correct == false)
+		{
+			correct = true;
+		}
+		if(choice == "Protons, Electrons, and Neutrons" && correct == false)
+		{
+			correct = true;
+		}
+		if(choice == "Study of Matter" && correct == false)
+		{
+			correct = true;
+		}
+		if (choice == "Bits, Bytes, and Gigabytes")
+		{
+
+		}
+		// also set the conversation nmananger to null to keep it from infinitely looping.
+		if (correct == true)
+		{
+			Debug.Log(this.gameObject.GetComponent<AtomNPC>().npcName + " trust: "  + (trustPoints + 1));
+			this.gameObject.GetComponent<AtomNPC>().trustPoints++;
+			correct = !correct;
+			convoManager.chosen = null;
+		}
+	}
+
 }
