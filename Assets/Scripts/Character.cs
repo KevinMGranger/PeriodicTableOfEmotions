@@ -44,7 +44,6 @@ public class Character : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-		matchList = new AtomNPC[4];
 		playerState = PlayerState.walking;
 		matchingState = MatchingState.notMatching;
     }
@@ -151,7 +150,23 @@ public class Character : MonoBehaviour
 			}
 		}
 	}
+	public bool AllMatch()
+	{
+		int counter = 0;
+		foreach (AtomNPC atom in matchList) 
+		{
+			if(atom.isMatched == true)
+			{
+				counter++;
+			}
+		}
+		if (counter >= 4)
+		{
+			return true;
+		}
+		return false;
 
+	}
 	// Obsolete methods, here for now
 	// This method matches two NPCs of the player's choice
 	// It also gives them a score out of 4 on the match (To be flushed out later)

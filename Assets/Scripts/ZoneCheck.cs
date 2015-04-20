@@ -6,6 +6,7 @@ public class ZoneCheck : MonoBehaviour
     // Have a collision check
     public bool collides = false;
 	public bool hitsNPC = false;
+	public AtomNPC collidedNPC;
 	public GameObject InteractionZoneCollided;
 
     // If Player enters collision zone, return true
@@ -18,6 +19,7 @@ public class ZoneCheck : MonoBehaviour
 		if(other.gameObject.name == "InteractionZone1" || other.gameObject.name == "InteractionZone2" || other.gameObject.name == "InteractionZone3" || other.gameObject.name == "InteractionZone4")
 		{
 			InteractionZoneCollided = other.gameObject;
+			collidedNPC = other.gameObject.transform.parent.gameObject.GetComponent<AtomNPC>();
 			hitsNPC = true;
 		}
     }
@@ -31,6 +33,7 @@ public class ZoneCheck : MonoBehaviour
 		if(other.gameObject.name == "InteractionZone1" || other.gameObject.name == "InteractionZone2" || other.gameObject.name == "InteractionZone3" || other.gameObject.name == "InteractionZone4")
 		{
 			InteractionZoneCollided = null;
+			collidedNPC = null;
 			hitsNPC = false;
 		}
     }
