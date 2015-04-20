@@ -30,6 +30,8 @@ public class LookAtMeMeow : MonoBehaviour {
     {
         var meToYou = (playa.position - whoToRotate.position).normalized;
 
+		meToYou.y = 0;
+
         var rotationTarget = Quaternion.LookRotation(meToYou);
 
         var time = (Time.time - startTime);
