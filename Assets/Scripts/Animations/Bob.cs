@@ -9,6 +9,7 @@ public class Bob : MonoBehaviour
 
 	[HideInInspector]
 	public Vector3 startingPosition;
+	Vector3 nextPosition;
 
 	public enum SinusoidalFunction { InverseCos, Cos, Sin }
 	public delegate float SinusoidalFunctionDel(float angle);
@@ -19,7 +20,8 @@ public class Bob : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		startingPosition = gameObject.transform.position;
+		startingPosition = gameObject.transform.localPosition;
+		nextPosition = startingPosition;
 
 		switch (sinusoidalFunction)
 		{
@@ -38,7 +40,6 @@ public class Bob : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		DrawLines();
 		float theta = (Mathf.PI * 2) * (Time.time / period);
 		float rawAmplitude = sinusoidalFunctionDel(theta);
 		float ampWithMag = magnitude * rawAmplitude;
@@ -49,22 +50,7 @@ public class Bob : MonoBehaviour
 
 	void setY(float y)
 	{
-		gameObject.transform.position = new Vector3(transform.position.x, y, transform.position.z);
-	}
-
-	void DrawLines()
-	{
-		DrawStartingPosLine();
-	}
-
-	void DrawStartingPosLine()
-	{
-		Vector3 left = startingPosition;
-		Vector3 right = startingPosition;
-
-		left.x -= transform.localScale.x;
-		right.x += transform.localScale.x;
-
-		Debug.DrawLine(left, right, Color.red);
+		nextPosition.y = y;
+		gameObject.transform.localPosition = nextPosition;
 	}
 }
