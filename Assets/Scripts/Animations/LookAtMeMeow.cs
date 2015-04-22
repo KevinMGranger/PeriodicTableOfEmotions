@@ -23,19 +23,26 @@ public class LookAtMeMeow : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        startTime = Time.time;
+		if (col.gameObject.tag != "Visual" && col.gameObject.tag != "Room") 
+		{
+			Debug.Log ("I collided with " + col.gameObject.tag);
+			startTime = Time.time;
+		}
     }
 
     void OnTriggerStay(Collider col)
     {
-        var meToYou = (playa.position - whoToRotate.position).normalized;
-
-		meToYou.y = 0;
-
-        var rotationTarget = Quaternion.LookRotation(meToYou);
-
-        var time = (Time.time - startTime);
-
-        whoToRotate.rotation = Quaternion.Slerp(whoToRotate.rotation, rotationTarget, rotationSpeed * time);
+		if (col.gameObject.tag != "Visual" && col.gameObject.tag != "Room") 
+		{
+			var meToYou = (playa.position - whoToRotate.position).normalized;
+			
+			meToYou.y = 0;
+			
+			var rotationTarget = Quaternion.LookRotation(meToYou);
+			
+			var time = (Time.time - startTime);
+			
+			whoToRotate.rotation = Quaternion.Slerp(whoToRotate.rotation, rotationTarget, rotationSpeed * time);
+		}
     }
 }

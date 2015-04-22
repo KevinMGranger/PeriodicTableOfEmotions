@@ -10,21 +10,29 @@ public class ZoneCheck : MonoBehaviour
 	public GameObject InteractionZoneCollided;
 
     // If Player enters collision zone, return true
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "Player")
-        {
-            collides = true;
-        }
-		if(other.gameObject.name == "InteractionZone1" || other.gameObject.name == "InteractionZone2" || other.gameObject.name == "InteractionZone3" || other.gameObject.name == "InteractionZone4")
+		if (other.gameObject.tag != "Visual" && other.gameObject.tag != "Room") 
 		{
-			InteractionZoneCollided = other.gameObject;
-			collidedNPC = other.gameObject.transform.parent.gameObject.GetComponent<AtomNPC>();
-			hitsNPC = true;
+			if (other.gameObject.tag == "Player")
+			{
+				collides = true;
+			}
+			if(other.gameObject.tag == "Atom")
+			{
+				Debug.Log("Zone Check Works");
+				InteractionZoneCollided = other.gameObject;
+				collidedNPC = other.gameObject.GetComponentInParent<AtomNPC>();
+				hitsNPC = true;
+			}
 		}
     }
+	void OnTriggerEnter2D(Collider2D col)
+	{
+		Debug.Log ("HERE! " + col.gameObject.tag);
+	}
     // If the player leaves, return false
-    void OnTriggerExit2D(Collider2D other)
+    void OnTriggerExit(Collider other)
     {
         if (other.gameObject.name == "Player")
         {

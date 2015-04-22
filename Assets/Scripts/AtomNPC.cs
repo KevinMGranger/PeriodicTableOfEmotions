@@ -1,6 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum NPCState
+{
+	Waiting,
+	Trusting,
+	Matched
+}
+
 public class AtomNPC : MonoBehaviour {
 
     // holds the charge of the NPC (Electron rotating number)
@@ -103,7 +110,7 @@ public class AtomNPC : MonoBehaviour {
 										new ResponseTree{
 										{"Let's do this",new ConversationPoint("What is an atom composed of?",
 											    new ResponseTree{ 
-												{"Bits, Bytes, and Gigabytes", new ConversationPoint("No, the anwer would be Protons, Neutrons, and Electrons.")},
+												{"Bits, Bytes, and Gigabytes", new ConversationPoint("'Fraid not.")},
 												{"Potatoes. Lots of Potatoes", new ConversationPoint("No.")},
 												{"Protons, Electrons, and Neutrons", new ConversationPoint("That's Correct! Now what is the definition of chemistry?", 
 													    new ResponseTree{
@@ -284,25 +291,52 @@ public class AtomNPC : MonoBehaviour {
 		// if the choice is freddy mercury, raise trust points
 		if (choice == "Antoine Lavoisier" && correct == false)
 		{
+			Debug.Log (this.gameObject.GetComponent<AtomNPC> ().npcName + " trust: " + (trustPoints + 1));
 			correct = true;
 		}
-		if(choice == "Protons, Electrons, and Neutrons" && correct == false)
+		if (choice == "Protons, Electrons, and Neutrons" && correct == false) 
 		{
+			Debug.Log (this.gameObject.GetComponent<AtomNPC> ().npcName + " trust: " + (trustPoints + 1));
 			correct = true;
 		}
-		if(choice == "Study of Matter" && correct == false)
+		if (choice == "Study of Matter" && correct == false) 
 		{
+			Debug.Log (this.gameObject.GetComponent<AtomNPC> ().npcName + " trust: " + (trustPoints + 1));
 			correct = true;
 		}
-		if (choice == "Bits, Bytes, and Gigabytes")
+		if (choice == "Bits, Bytes, and Gigabytes") 
 		{
-
+			Debug.Log (this.gameObject.GetComponent<AtomNPC> ().npcName + " trust: " + (trustPoints + 1));
+			correct = false;
+			trustPoints--;
+			convoManager.chosen = null;
+		}
+		if (choice == "Potatoes. Lots of Potatoes")
+		{
+			Debug.Log (this.gameObject.GetComponent<AtomNPC> ().npcName + " trust: " + (trustPoints + 1));
+			correct = false;
+			trustPoints--;
+			convoManager.chosen = null;
+		}
+		if (choice == "Romance!!!") 
+		{
+			Debug.Log (this.gameObject.GetComponent<AtomNPC> ().npcName + " trust: " + (trustPoints + 1));
+			correct = false;
+			trustPoints--;
+			convoManager.chosen = null;
+		}
+		if (choice == "The study of kittens") 
+		{
+			Debug.Log (this.gameObject.GetComponent<AtomNPC> ().npcName + " trust: " + (trustPoints + 1));
+			correct = false;
+			trustPoints--;
+			convoManager.chosen = null;
 		}
 		// also set the conversation nmananger to null to keep it from infinitely looping.
-		if (correct == true)
+		if (correct == true) 
 		{
-			//Debug.Log(this.gameObject.GetComponent<AtomNPC>().npcName + " trust: "  + (trustPoints + 1));
-			this.gameObject.GetComponent<AtomNPC>().trustPoints++;
+			Debug.Log (this.gameObject.GetComponent<AtomNPC> ().npcName + " trust: " + (trustPoints + 1));
+			this.gameObject.GetComponent<AtomNPC> ().trustPoints++;
 			correct = !correct;
 			convoManager.chosen = null;
 		}
