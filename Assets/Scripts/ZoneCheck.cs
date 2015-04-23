@@ -27,10 +27,6 @@ public class ZoneCheck : MonoBehaviour
 			}
 		}
     }
-	void OnTriggerEnter2D(Collider2D col)
-	{
-		Debug.Log ("HERE! " + col.gameObject.tag);
-	}
     // If the player leaves, return false
     void OnTriggerExit(Collider other)
     {

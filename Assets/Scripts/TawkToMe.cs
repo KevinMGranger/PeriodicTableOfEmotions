@@ -10,12 +10,12 @@ public class TawkToMe : MonoBehaviour {
 	// Get ZoneCheck's GameObject
 	public ZoneCheck zone;
 	// Use this for initialization
-	void Start () {
+	void Awake() {
 		zone = gameObject.GetComponent<ZoneCheck>();
 		convo = new ConversationPoint ("Hey! I'm Generic!",
 		                               new ResponseTree {
 			{ "Hi, I'm Adom!", new ConversationPoint("So you want to try and match me right? Well here's the deal, I'll quiz you on chemistry. If you can get three correct answers, I'll give you more information on my nature.", 
-				                                new ResponseTree{ 
+				                                         new ResponseTree{ 
 					{"Sure!", new ConversationPoint("Okay cool! Here's your first question: Who is the father of modern Chemistry?",
 						                                new ResponseTree{
 							{"Queen Elizabeth II", new ConversationPoint("She's too busy ruling England")},
@@ -38,6 +38,8 @@ public class TawkToMe : MonoBehaviour {
 														})}})}})}})}})}})}});
 		convoManager = GameObject.Find("Conversation Manager").GetComponent<ConversationManager>();
 	}
+	void Start () {
+	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -51,10 +53,9 @@ public class TawkToMe : MonoBehaviour {
 
 		}
 	}
-
 	void OnTriggerStay(Collider col)
 	{
-		if(Input.GetKeyDown(KeyCode.E))
+		if(Input.GetKeyDown(KeyCode.E) && col.gameObject.name == "Player")
 		{
 			convoManager.conversationTree = convo;
 			convoManager.StartConvo ();
