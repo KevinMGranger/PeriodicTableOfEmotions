@@ -5,6 +5,8 @@ public class TawkToMe : MonoBehaviour {
 
 	public GameObject talkBubble;
 
+	public SpeechBubbleChanger sbc;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -25,6 +27,7 @@ public class TawkToMe : MonoBehaviour {
 
 	void OnTriggerStay(Collider col)
 	{
+		if (Input.GetKeyDown(KeyCode.F)) sbc.SetDemoAlternating();
 	}
 
 	void OnTriggerExit(Collider col)
