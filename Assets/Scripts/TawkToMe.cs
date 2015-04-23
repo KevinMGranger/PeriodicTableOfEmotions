@@ -6,6 +6,7 @@ public class TawkToMe : MonoBehaviour {
 	public GameObject talkBubble;
 	public ConversationPoint convo;
 	public ConversationManager convoManager;
+	public bool isDialogueOpen = false;
 	// Get ZoneCheck's GameObject
 	public ZoneCheck zone;
 	// Use this for initialization
@@ -57,15 +58,20 @@ public class TawkToMe : MonoBehaviour {
 		{
 			convoManager.conversationTree = convo;
 			convoManager.StartConvo ();
+			isDialogueOpen = true;
 		}
 	}
 
 	void OnTriggerExit(Collider col)
 	{
-		if (col.gameObject.name == "Player")
+		if (col.gameObject.name == "Player") {
+			talkBubble.SetActive (false);
+
+		} 
+		if (isDialogueOpen == true) 
 		{
-			talkBubble.SetActive(false);
 			convoManager.EndConvo();
+			isDialogueOpen = false;
 		}
 	}
 }
