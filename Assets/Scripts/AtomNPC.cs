@@ -50,11 +50,6 @@ public class AtomNPC : MonoBehaviour {
 	// Instance of the player
 	public Character player;
 
-    // A prompt for the player
-    public GameObject GPrompt;
-	public GameObject DPrompt;
-    public GameObject EPrompt;
-
     // Conversation Manager
     public ConversationPoint convo;
     public ConversationPoint convoTrust;
@@ -153,11 +148,6 @@ public class AtomNPC : MonoBehaviour {
 				player.grabbedNPC = this;
 				player.tryGrab = false;
 				player.grabbing = true;
-				DPrompt.gameObject.SetActive(true);
-			}
-			if(player.grabbing != true)
-			{
-				DPrompt.gameObject.SetActive(false);
 			}
 
 			if(playerAttention == false)
@@ -171,17 +161,9 @@ public class AtomNPC : MonoBehaviour {
 			}
 			else
 			{
-                EPrompt.gameObject.SetActive(true);
                 if (trustPoints >= 3)
                 {
-                    EPrompt.gameObject.SetActive(false);
-                    GPrompt.gameObject.SetActive(true);
 					readyToMatch = true;
-                }
-                if (player.grabbing == true)
-                {
-                    GPrompt.gameObject.SetActive(false);
-					EPrompt.gameObject.SetActive(false);
                 }
                 // handles quite literally the whole conversation system now.
             	//Debug.Log("Charge: " + atomicCharge);
@@ -219,8 +201,6 @@ public class AtomNPC : MonoBehaviour {
 		else if(playerAttention == true)
         {
 			// Should in theory set the prompts to inactive.
-			GPrompt.gameObject.SetActive(false);
-            EPrompt.gameObject.SetActive(false);
             npcImage.gameObject.SetActive(false);
 			if(isDialogueOpen == true)
 			{
