@@ -319,6 +319,8 @@ MonoBehaviour:
   heart: {fileID: 2100000, guid: f66c3de00b49b5741ac2ef4127ec2175, type: 2}
   initialState: 3
   uiText: {fileID: 0}
+  initialText: 
+  timeInterval: 1.20000005
 --- !u!1 &271083777
 GameObject:
   m_ObjectHideFlags: 0
@@ -888,6 +890,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   talkBubble: {fileID: 224102309}
   sbc: {fileID: 224102315}
+  talkInputName: Talk
 --- !u!1001 &569087657
 Prefab:
   m_ObjectHideFlags: 0
@@ -1787,6 +1790,14 @@ Prefab:
       propertyPath: sbc
       value: 
       objectReference: {fileID: 224102315}
+    - target: {fileID: 11456798, guid: 4ad6f8e9965595f4fb39557b0bb50e1b, type: 2}
+      propertyPath: timeInterval
+      value: 1.20000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 11445396, guid: 4ad6f8e9965595f4fb39557b0bb50e1b, type: 2}
+      propertyPath: talkInputName
+      value: Talk
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4ad6f8e9965595f4fb39557b0bb50e1b, type: 2}
   m_RootGameObject: {fileID: 1009023521}

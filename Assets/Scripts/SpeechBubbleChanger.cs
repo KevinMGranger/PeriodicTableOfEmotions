@@ -60,6 +60,9 @@ public class SpeechBubbleChanger : MonoBehaviour
 	"If not given, it will search for the first Text component in all children.")]
 	public Text uiText;
 
+	[ContextMenu("Text to use to alternate if not specified when called")]
+	public string initialText;
+
 	string text
 	{
 		get
@@ -75,12 +78,23 @@ public class SpeechBubbleChanger : MonoBehaviour
 	/// <summary>
 	/// Is the text currently being displayed?
 	/// </summary>
-	bool onText;
+	bool onText
+	{
+		get
+		{
+			return uiText.enabled;
+		}
+		set
+		{
+			uiText.enabled = value;
+		}
+	}
 
 	/// <summary>
-	/// How often to switch between the laternate and the text
+	/// How often to switch between the alternate and the text
 	/// </summary>
-	float timeInterval;
+	[ContextMenu("How often to switch between the alternate and the text")]
+	public float timeInterval;
 
 	/// <summary>
 	/// When should we next switch?
@@ -119,12 +133,17 @@ public class SpeechBubbleChanger : MonoBehaviour
 	}
 
 	// Set to alternating mode
-	public void SetAlternating(SpeechBubbleState alternate, string text, float timeInterval)
+	public void SetAlternating(SpeechBubbleState alternate)
 	{
+		SetAlternating(alternate, initialText);
+	}
+
+	public void SetAlternating(SpeechBubbleState alternate, string text)
+	{
+		Debug.Log("sb alternating");
 		this.State = SpeechBubbleState.AlternatingText;
 		this.alternate = alternate;
 		this.text = text;
-		this.timeInterval = timeInterval;
 
 		onText = false;
 		SetMaterial(alternate);
@@ -136,29 +155,22 @@ public class SpeechBubbleChanger : MonoBehaviour
 		if (!uiText) uiText = GetComponentInChildren<Text>();
 
 		State = initialState;
+		text = initialText;
+	}
+
+	void toggle()
+	{
+		onText = !onText;
+		SetMaterial((onText) ? SpeechBubbleState.Blank : alternate);
 	}
 
 	void Update()
 	{
-		// THIS IS SO UGLY KEVIN
-		// YOU SHOULD FEEL BAD
 		if (state == SpeechBubbleState.AlternatingText)
 		{
 			if (nextTime < Time.time)
 			{
-				if (onText)
-				{
-					onText = false;
-					uiText.enabled = false;
-					SetMaterial(alternate);
-				}
-				else
-				{
-					// not on text
-					onText = true;
-					uiText.enabled = true;
-					SetMaterial(blank);
-				}
+				toggle();
 
 				nextTime = Time.time + timeInterval;
 			}
@@ -167,6 +179,7 @@ public class SpeechBubbleChanger : MonoBehaviour
 
 	public void SetDemoAlternating()
 	{
-		SetAlternating(SpeechBubbleState.Ellipsis, "F", 1.5f);
+		Debug.Log("setting demo");
+		SetAlternating(SpeechBubbleState.Ellipsis, "F");
 	}
 }

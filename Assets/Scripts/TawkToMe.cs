@@ -7,6 +7,9 @@ public class TawkToMe : MonoBehaviour {
 
 	public SpeechBubbleChanger sbc;
 
+	[ContextMenu("What input name do we ask the Input Manager about?")]
+	public string talkInputName = "Talk";
+
 	// Use this for initialization
 	void Start () {
 	
@@ -27,7 +30,7 @@ public class TawkToMe : MonoBehaviour {
 
 	void OnTriggerStay(Collider col)
 	{
-		if (Input.GetKeyDown(KeyCode.F)) sbc.SetDemoAlternating();
+		if (Input.GetButtonDown(talkInputName)) sbc.SetDemoAlternating();
 	}
 
 	void OnTriggerExit(Collider col)
