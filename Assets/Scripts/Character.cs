@@ -58,7 +58,7 @@ public class Character : MonoBehaviour
 		// If the player state is walking...
 		if(playerState == PlayerState.walking)
 		{
-        	Movement();
+        	//Movement();
 
 			// Enters the player into the Matching state
 			if(Input.GetKeyDown(KeyCode.G))
@@ -110,6 +110,7 @@ public class Character : MonoBehaviour
     }
 
     // Handles all of the movement. (Called in Update)
+	/*
     private void Movement()
     {
         // get position.
@@ -121,7 +122,7 @@ public class Character : MonoBehaviour
         //Vector2 slow = (new Vector2(posX, posY).normalized) * -speed;
 
         // Move the rigidbody, using the vector
-        rigidbody2D.AddForce(move, ForceMode2D.Impulse);
+        rigidbody.AddForce(move, ForceMode.Impulse);
 
         //if (move == Vector2.zero)
         //{
@@ -137,6 +138,7 @@ public class Character : MonoBehaviour
             rigidbody2D.velocity = new Vector2(rigidbody.velocity.x, maxSpeed * rigidbody.velocity.y);
         }
     }
+    */
 
 	// Adds an NPC to the match list
 	public void AddToMatchList(AtomNPC atom)
