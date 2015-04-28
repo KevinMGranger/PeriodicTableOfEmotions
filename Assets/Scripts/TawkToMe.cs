@@ -36,15 +36,23 @@ public class TawkToMe : MonoBehaviour {
             npcName = "Generic";
         }
 		zone = gameObject.GetComponent<ZoneCheck>();
-        convo = new ConversationPoint("Hey! I'm " + this.gameObject.GetComponent<TawkToMe>().npcName,
+        convo = new ConversationPoint("Hey! I'm " + npcName,
 		                               new ResponseTree {
 										{"Hi, I'm Adom", new ConversationPoint("Nice to meet you!") }
 		});
         convoTrust = new ConversationPoint("Hi Adom. What's up?",
             new ResponseTree{
-                {"Let me learn more about you",new ConversationPoint("You want to know more about me? Then you're going to have to beat my chemistry quiz!")},
-                {"Just saying hi!", new ConversationPoint("Well that's no fun")}
+                {"Just saying hi!", new ConversationPoint("Well that's no fun")},
+                {"Let me learn more about you",new ConversationPoint("You want to know more about me? Then you're going to have to beat my chemistry quiz! (Coming Soon)")}
             });
+                    //new ResponseTree{
+                    //    {"Okay", new ConversationPoint("Good! First question: What is Chemistry the study of?",
+                    //        new ResponseTree{
+                    //            {"Study of matter", new ConversationPoint("Correct!")},
+                    //            {"Study of kittens", new ConversationPoint("Nope")},
+                    //            {"Study of romance", new ConversationPoint("Well you'd be correct with anyone else")}
+                    //        //})}})},
+                    //        })}})}});
 		convoManager = GameObject.Find("Conversation Manager").GetComponent<ConversationManager>();
 
         state = NPCState.Waiting;
@@ -55,7 +63,10 @@ public class TawkToMe : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        choice = convoManager.GetText();
+        if (isDialogueOpen)
+        {
+            choice = convoManager.GetText();
+        }
         CheckDialogue();
         if (trustPoints >= 1)
         {
@@ -69,7 +80,7 @@ public class TawkToMe : MonoBehaviour {
         {
             convoManager.conversationTree = convoTrust;
         }
-
+        //Debug.Log(state);
 	}
 
 
@@ -107,7 +118,7 @@ public class TawkToMe : MonoBehaviour {
 	}
     public void CheckDialogue()
     {
-        // if the choice is freddy mercury, raise trust points
+        // if the choice is valid, raise trust Points.
         if (choice == "Hi, I'm Adom" && correct == false)
         {
             //Debug.Log(" trust: " + (trustPoints + 1));
@@ -117,8 +128,8 @@ public class TawkToMe : MonoBehaviour {
         // also set the conversation nmananger to null to keep it from infinitely looping.
         if (correct == true)
         {
-            Debug.Log(" trust: " + (trustPoints + 1));
-            this.gameObject.GetComponent<TawkToMe>().trustPoints++;
+            Debug.Log(npcName + " trust: " + (trustPoints + 1));
+            trustPoints++;
             correct = !correct;
             convoManager.chosen = null;
         }
