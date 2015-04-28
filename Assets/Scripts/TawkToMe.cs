@@ -18,8 +18,6 @@ public class TawkToMe : MonoBehaviour {
 	public bool isColliding = false;
     public MouseLook msLook;
     public int trustPoints;
-	// Get ZoneCheck's GameObject
-	public ZoneCheck zone;
     public NPCState state;
 
     // Name of the NPC
@@ -29,13 +27,17 @@ public class TawkToMe : MonoBehaviour {
     public string choice;
     public bool correct;
 
+	public SpeechBubbleChanger sbc;
+
+	[ContextMenu("What input name do we ask the Input Manager about?")]
+	public string talkInputName = "Talk";
+
 	// Use this for initialization
 	void Awake() {
         if(npcName == null)
         {
             npcName = "Generic";
         }
-		zone = gameObject.GetComponent<ZoneCheck>();
         convo = new ConversationPoint("Hey! I'm " + this.gameObject.GetComponent<TawkToMe>().npcName,
 		                               new ResponseTree {
 										{"Hi, I'm Adom", new ConversationPoint("Nice to meet you!") }
@@ -83,7 +85,7 @@ public class TawkToMe : MonoBehaviour {
 	}
 	void OnTriggerStay(Collider col)
 	{
-		if(Input.GetKeyDown(KeyCode.E) && col.gameObject.name == "Player" && isDialogueOpen == false)
+		if(Input.GetButtonDown(talkInputName) && col.gameObject.name == "Player" && isDialogueOpen == false)
 		{
             msLook.active = false;
             convoManager.StartConvo();

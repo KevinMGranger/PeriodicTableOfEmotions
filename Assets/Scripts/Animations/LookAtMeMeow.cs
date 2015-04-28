@@ -12,6 +12,9 @@ public class LookAtMeMeow : MonoBehaviour {
 
     float startTime;
 
+	[Tooltip("How long after entering my zone should I turn to face you?")]
+	public float delay;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -26,7 +29,7 @@ public class LookAtMeMeow : MonoBehaviour {
 		if (col.gameObject.tag != "Visual" && col.gameObject.tag != "Room") 
 		{
 			Debug.Log ("I collided with " + col.gameObject.tag);
-			startTime = Time.time;
+			startTime = Time.time + delay;
 		}
     }
 
@@ -34,6 +37,7 @@ public class LookAtMeMeow : MonoBehaviour {
     {
 		if (col.gameObject.tag != "Visual" && col.gameObject.tag != "Room") 
 		{
+
 			var meToYou = (playa.position - whoToRotate.position).normalized;
 			
 			meToYou.y = 0;
