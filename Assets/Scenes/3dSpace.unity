@@ -73,6 +73,7 @@ NavMeshSettings:
     minRegionArea: 2
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
+    tileSizeHint: 0
   m_NavMesh: {fileID: 0}
 --- !u!1 &42070042
 GameObject:
@@ -372,6 +373,7 @@ MonoBehaviour:
   convoManager: {fileID: 0}
   isDialogueOpen: 0
   isColliding: 0
+  msLook: {fileID: 414315172}
   zone: {fileID: 0}
 --- !u!114 &141064696
 MonoBehaviour:
@@ -837,7 +839,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 414315169}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 187b5d614af061c41bb520cb286ef014, type: 3}
   m_Name: 
@@ -1000,6 +1002,7 @@ MonoBehaviour:
   convoManager: {fileID: 1232926143}
   isDialogueOpen: 0
   isColliding: 0
+  msLook: {fileID: 414315172}
   zone: {fileID: 504337955}
 --- !u!114 &504337955
 MonoBehaviour:
@@ -1158,6 +1161,10 @@ Prefab:
     - target: {fileID: 11400000, guid: 9d4133d5d30b644bd87802a347eaccbe, type: 2}
       propertyPath: sensitivityY
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 9d4133d5d30b644bd87802a347eaccbe, type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9d4133d5d30b644bd87802a347eaccbe, type: 2}
@@ -1754,6 +1761,10 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 414315175}
+    - target: {fileID: 11445396, guid: 4ad6f8e9965595f4fb39557b0bb50e1b, type: 2}
+      propertyPath: msLook
+      value: 
+      objectReference: {fileID: 414315172}
     m_RemovedComponents:
     - {fileID: 6545400, guid: 4ad6f8e9965595f4fb39557b0bb50e1b, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4ad6f8e9965595f4fb39557b0bb50e1b, type: 2}
@@ -2271,6 +2282,10 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 414315175}
+    - target: {fileID: 11445396, guid: 4ad6f8e9965595f4fb39557b0bb50e1b, type: 2}
+      propertyPath: msLook
+      value: 
+      objectReference: {fileID: 414315172}
     m_RemovedComponents:
     - {fileID: 6545400, guid: 4ad6f8e9965595f4fb39557b0bb50e1b, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4ad6f8e9965595f4fb39557b0bb50e1b, type: 2}
@@ -2932,8 +2947,8 @@ MonoBehaviour:
   m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignoreReversedGraphics: 1
-  blockingObjects: 0
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295

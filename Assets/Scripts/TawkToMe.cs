@@ -8,6 +8,7 @@ public class TawkToMe : MonoBehaviour {
 	public ConversationManager convoManager;
 	public bool isDialogueOpen = false;
 	public bool isColliding = false;
+    public MouseLook msLook;
 	// Get ZoneCheck's GameObject
 	public ZoneCheck zone;
 	// Use this for initialization
@@ -24,7 +25,6 @@ public class TawkToMe : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
 	}
 
 
@@ -40,6 +40,7 @@ public class TawkToMe : MonoBehaviour {
 	{
 		if(Input.GetKeyDown(KeyCode.E) && col.gameObject.name == "Player" && isDialogueOpen == false)
 		{
+            msLook.active = false;
 			convoManager.conversationTree = convo;
 			convoManager.StartConvo ();
 			isDialogueOpen = true;
@@ -55,6 +56,7 @@ public class TawkToMe : MonoBehaviour {
 		} 
 		if (isDialogueOpen == true) 
 		{
+            msLook.active = true;
 			convoManager.EndConvo();
 			isDialogueOpen = false;
 		}
