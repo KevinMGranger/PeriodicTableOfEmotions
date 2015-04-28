@@ -73,6 +73,7 @@ NavMeshSettings:
     minRegionArea: 2
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
+    tileSizeHint: 0
   m_NavMesh: {fileID: 0}
 --- !u!1 &42070042
 GameObject:
@@ -277,7 +278,7 @@ MonoBehaviour:
   msLook: {fileID: 414315172}
   trustPoints: 0
   state: 0
-  npcName: 
+  npcName: Kevin
   choice: 
   correct: 0
   sbc: {fileID: 378614117}
@@ -1101,8 +1102,8 @@ MonoBehaviour:
   m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignoreReversedGraphics: 1
-  blockingObjects: 0
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -1557,7 +1558,7 @@ MonoBehaviour:
   choiceButtonProto: {fileID: 11412158, guid: f4250242a0a9c2548a25b6cdfc00dc56, type: 2}
   box: {fileID: 2125000784}
   chosen: 
-  demoMode: 0
+  demoMode: 1
 --- !u!4 &1232926144
 Transform:
   m_ObjectHideFlags: 0
@@ -1903,6 +1904,10 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 414315175}
+    - target: {fileID: 11445396, guid: 4ad6f8e9965595f4fb39557b0bb50e1b, type: 2}
+      propertyPath: npcName
+      value: Kevin
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4ad6f8e9965595f4fb39557b0bb50e1b, type: 2}
   m_RootGameObject: {fileID: 2036024796}
@@ -2332,8 +2337,8 @@ MonoBehaviour:
   m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignoreReversedGraphics: 1
-  blockingObjects: 0
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295

@@ -111,8 +111,8 @@ public class ConversationManager : MonoBehaviour {
     {
         chosen = choice;
         ConversationPoint next;
-        var found = conversationTree.getNextPointFromResponse(choice, out next);
-
+        bool found = conversationTree.getNextPointFromResponse(choice, out next);
+        //Debug.Log(next.optionTree.Keys);
         if (found)
         {
             conversationTree = next;
