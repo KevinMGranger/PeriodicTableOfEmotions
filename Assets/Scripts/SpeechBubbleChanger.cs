@@ -11,10 +11,10 @@ public enum SpeechBubbleState
 	AlternatingText
 }
 
+[ExecuteInEditMode]
 [RequireComponent(typeof(Shader))]
 public class SpeechBubbleChanger : MonoBehaviour
 {
-
 	/// <summary>
 	/// Materials to use when switching.
 	/// </summary>
@@ -22,12 +22,10 @@ public class SpeechBubbleChanger : MonoBehaviour
 
 	#region State
 
-	public SpeechBubbleState initialState;
-
 	/// <summary>
 	/// The current state of the behavior of the speech bubble
 	/// </summary>
-	SpeechBubbleState state;
+	public SpeechBubbleState state;
 
 	/// <summary>
 	/// The other state to alternate to if the main state is in alternating mode
@@ -37,17 +35,10 @@ public class SpeechBubbleChanger : MonoBehaviour
 	/// <summary>
 	/// Change state, altering the material as needed
 	/// </summary>
-	SpeechBubbleState State
+	void SetState(SpeechBubbleState newState)
 	{
-		get
-		{
-			return state;
-		}
-		set
-		{
-			state = value;
-			SetMaterial(value);
-		}
+		state = newState;
+		SetMaterial(newState);
 	}
 
 	#endregion
@@ -141,7 +132,7 @@ public class SpeechBubbleChanger : MonoBehaviour
 	public void SetAlternating(SpeechBubbleState alternate, string text)
 	{
 		Debug.Log("sb alternating");
-		this.State = SpeechBubbleState.AlternatingText;
+		this.state = SpeechBubbleState.AlternatingText;
 		this.alternate = alternate;
 		this.text = text;
 
@@ -154,7 +145,7 @@ public class SpeechBubbleChanger : MonoBehaviour
 	{
 		if (!uiText) uiText = GetComponentInChildren<Text>();
 
-		State = initialState;
+		SetState(state);
 		text = initialText;
 	}
 
@@ -175,6 +166,7 @@ public class SpeechBubbleChanger : MonoBehaviour
 				nextTime = Time.time + timeInterval;
 			}
 		}
+		SetMaterial(state);
 	}
 
 	public void SetDemoAlternating()

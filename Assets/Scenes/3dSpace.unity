@@ -255,7 +255,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 82057b02873ae0945bb2136ec5072339, type: 2}
+  - {fileID: 2100000, guid: f66c3de00b49b5741ac2ef4127ec2175, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -318,8 +318,8 @@ MonoBehaviour:
   exclaim: {fileID: 2100000, guid: d9c7a34bcde71104c8f240f2849a7d28, type: 2}
   heart: {fileID: 2100000, guid: f66c3de00b49b5741ac2ef4127ec2175, type: 2}
   initialState: 3
-  uiText: {fileID: 0}
-  initialText: 
+  uiText: {fileID: 773853900}
+  initialText: F
   timeInterval: 1.20000005
 --- !u!1 &271083777
 GameObject:
@@ -1781,7 +1781,7 @@ Prefab:
     - target: {fileID: 2345398, guid: 4ad6f8e9965595f4fb39557b0bb50e1b, type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 82057b02873ae0945bb2136ec5072339, type: 2}
+      objectReference: {fileID: 2100000, guid: f66c3de00b49b5741ac2ef4127ec2175, type: 2}
     - target: {fileID: 11456798, guid: 4ad6f8e9965595f4fb39557b0bb50e1b, type: 2}
       propertyPath: initialState
       value: 3
@@ -1798,6 +1798,14 @@ Prefab:
       propertyPath: talkInputName
       value: Talk
       objectReference: {fileID: 0}
+    - target: {fileID: 11456798, guid: 4ad6f8e9965595f4fb39557b0bb50e1b, type: 2}
+      propertyPath: initialText
+      value: F
+      objectReference: {fileID: 0}
+    - target: {fileID: 11456798, guid: 4ad6f8e9965595f4fb39557b0bb50e1b, type: 2}
+      propertyPath: uiText
+      value: 
+      objectReference: {fileID: 773853900}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4ad6f8e9965595f4fb39557b0bb50e1b, type: 2}
   m_RootGameObject: {fileID: 1009023521}
