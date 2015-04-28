@@ -23,11 +23,6 @@ public class Character : MonoBehaviour
     public float maxSpeed = 10;
     public float speed = 5.0f;
 
-	// List of possible NPCs to match
-	public AtomNPC[] matchList;
-
-	// Match Choice
-	public AtomNPC grabbedNPC;
 
     // grab Object's positions.
     public float posX;
@@ -66,7 +61,6 @@ public class Character : MonoBehaviour
 				if(grabbing)
 				{
 					grabbing = false;
-					grabbedNPC = null;
 				}
 				else
 				{
@@ -95,7 +89,6 @@ public class Character : MonoBehaviour
 		else if(playerState == PlayerState.matching)
 		{
 			// Call the Match method
-			Match ();
 
 			/*
 			// If 'G' is pressed while matching, exit the matching process
@@ -108,51 +101,4 @@ public class Character : MonoBehaviour
 			*/
 		}
     }
-
-
-	// Adds an NPC to the match list
-	public void AddToMatchList(AtomNPC atom)
-	{
-		for(int i = 0; i < matchList.Length; i++)
-		{
-			if(matchList[i] == null)
-			{
-				matchList[i] = atom;
-				break;
-			}
-		}
-	}
-	public bool AllMatch()
-	{
-		int counter = 0;
-		foreach (AtomNPC atom in matchList) 
-		{
-			if(atom.isMatched == true)
-			{
-				counter++;
-			}
-		}
-		if (counter >= 4)
-		{
-			return true;
-		}
-		return false;
-
-	}
-	// Obsolete methods, here for now
-	// This method matches two NPCs of the player's choice
-	// It also gives them a score out of 4 on the match (To be flushed out later)
-	private void Match()
-	{
-	}
-
-	// Shows the player the next set of choices when matching
-	private void ShowSecondMatchChoices(int initialChoice)
-	{
-	}
-
-	public GameObject GetGameObject()
-	{
-		return gameObject;
-	}
 }

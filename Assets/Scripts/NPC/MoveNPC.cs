@@ -26,7 +26,7 @@ public class MoveNPC : MonoBehaviour {
 	void followPlayer()
 	{
 		// Follow the player here
-		if((Vector3.Distance(this.transform.position, player.GetGameObject().transform.position)) > 1.7f)
+		if((Vector3.Distance(this.transform.position, player.gameObject.transform.position)) > 1.7f)
 		{
 			Quaternion startingRotation = transform.rotation;
 			transform.LookAt(player.transform.position);
