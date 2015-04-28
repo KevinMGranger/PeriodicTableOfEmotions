@@ -55,25 +55,21 @@ public class TawkToMe : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (trustPoints >= 1)
-        {
-            convoManager.conversationTree = convoTrust;
-        }
         choice = convoManager.GetText();
         CheckDialogue();
-
+        if (trustPoints >= 1)
+        {
+            state = NPCState.Trusting;
+        }
         if (state == NPCState.Waiting)
         {
             convoManager.conversationTree = convo;
         }
         else if (state == NPCState.Trusting)
         {
-
+            convoManager.conversationTree = convoTrust;
         }
-        else
-        {
 
-        }
 	}
 
 
@@ -90,7 +86,7 @@ public class TawkToMe : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.E) && col.gameObject.name == "Player" && isDialogueOpen == false)
 		{
             msLook.active = false;
-			convoManager.StartConvo ();
+            convoManager.StartConvo();
 			isDialogueOpen = true;
 		}
 	}
