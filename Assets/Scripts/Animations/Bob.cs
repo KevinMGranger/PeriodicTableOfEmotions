@@ -1,21 +1,36 @@
 ﻿using UnityEngine;
-using System.Collections;
 
+/// <summary>
+/// Bob up and down in place sinusoidally.
+/// </summary>
 public class Bob : MonoBehaviour
 {
-	public float magnitude;
 
-	public float period;
+	public float magnitude = 0.17f;
+
+	[Tooltip("How many seconds it takes for a cycle to complete")]
+	public float period = 4;
 
 	[HideInInspector]
-	public Vector3 startingPosition;
+	Vector3 startingPosition;
+
+	// the next position to pass to the associated gameobject.
+	// kept as a member to avoid unneeded allocation each update
+	// (or do structs not work that way? TODO)
 	Vector3 nextPosition;
 
-	public enum SinusoidalFunction { InverseCos, Cos, Sin }
-	public delegate float SinusoidalFunctionDel(float angle);
+	#region Sinusoidal Function Selection
+	// Internally, we take the enum selected in the inspector and use it to hook up a function delegate.
 
+	public enum SinusoidalFunction { InverseCos, Cos, Sin }
+
+	[Tooltip("Which sinusoidal function's path to follow")]
 	public SinusoidalFunction sinusoidalFunction;
-	public SinusoidalFunctionDel sinusoidalFunctionDel;
+
+	delegate float SinusoidalFunctionDel(float angle);
+	SinusoidalFunctionDel sinusoidalFunctionDel;
+
+	#endregion
 
 	// Use this for initialization
 	void Start()
@@ -23,6 +38,7 @@ public class Bob : MonoBehaviour
 		startingPosition = gameObject.transform.localPosition;
 		nextPosition = startingPosition;
 
+		// Set up the right function based on the given preference
 		switch (sinusoidalFunction)
 		{
 			case SinusoidalFunction.Cos:
@@ -37,7 +53,6 @@ public class Bob : MonoBehaviour
 		}
 	}
 
-	// Update is called once per frame
 	void Update()
 	{
 		float theta = (Mathf.PI * 2) * (Time.time / period);
@@ -45,11 +60,6 @@ public class Bob : MonoBehaviour
 		float ampWithMag = magnitude * rawAmplitude;
 		float y = startingPosition.y + magnitude + ampWithMag;
 
-		setY(y);
-	}
-
-	void setY(float y)
-	{
 		nextPosition.y = y;
 		gameObject.transform.localPosition = nextPosition;
 	}
