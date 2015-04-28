@@ -38,23 +38,35 @@ public class TawkToMe : MonoBehaviour {
         {
             npcName = "Generic";
         }
-        convo = new ConversationPoint("Hey! I'm " + npcName,
-		                               new ResponseTree {
-										{"Hi, I'm Adom", new ConversationPoint("Nice to meet you!") }
-		});
-        convoTrust = new ConversationPoint("Hi Adom. What's up?",
-            new ResponseTree{
-                {"Just saying hi!", new ConversationPoint("Well that's no fun")},
-                {"Let me learn more about you",new ConversationPoint("You want to know more about me? Then you're going to have to beat my chemistry quiz! (Coming Soon)")}
-            });
-                    //new ResponseTree{
-                    //    {"Okay", new ConversationPoint("Good! First question: What is Chemistry the study of?",
-                    //        new ResponseTree{
-                    //            {"Study of matter", new ConversationPoint("Correct!")},
-                    //            {"Study of kittens", new ConversationPoint("Nope")},
-                    //            {"Study of romance", new ConversationPoint("Well you'd be correct with anyone else")}
-                    //        //})}})},
-                    //        })}})}});
+		convo = new ConversationPoint("Hey! I'm " + npcName,
+			new ResponseTree {
+                { "Hi, I'm Adom!", new ConversationPoint("So you want to try and match me right? Well here's the deal, I'll quiz you on chemistry. If you can get three correct answers, I'll give you more information on my nature.", 
+				new ResponseTree{ 
+					{"Sure!", new ConversationPoint("Okay cool! Here's your first question: Who is the father of modern Chemistry?",
+						  new ResponseTree{
+							{"Queen Elizabeth II", new ConversationPoint("She's too busy ruling England")},
+							{"Sir Francis Drake", new ConversationPoint("No, I think not")},
+							{"Antoine Lavoisier", new ConversationPoint("He is widely considered the founder of Modern Chemistry. You're correct!",
+								new ResponseTree{
+									{"Great!", new ConversationPoint("Okay now on to the real thing",
+										new ResponseTree{
+										{"Let's do this",new ConversationPoint("What is an atom composed of?",
+											    new ResponseTree{ 
+												{"Bits, Bytes, and Gigabytes", new ConversationPoint("'Fraid not.")},
+												{"Potatoes. Lots of Potatoes", new ConversationPoint("No.")},
+												{"Protons, Electrons, and Neutrons", new ConversationPoint("That's Correct! Now what is the definition of chemistry?", 
+													    new ResponseTree{
+														{"Romance!!!", new ConversationPoint("Yes!!! But also no!!")},
+														{"Study of Matter", new ConversationPoint("Yeah, that's basically it!")},
+														{"The study of kittens", new ConversationPoint ("I don't think we're on the same page here.")}
+
+					//})}})}});
+					})}})}})}})}})}})}});
+        convoTrust = new ConversationPoint("Hey Adom!",
+              new ResponseTree {
+                { "Sup " + npcName, new ConversationPoint("nm, u?")}
+              });
+		convoWin = new ConversationPoint ("Congratulations!!! You've matched all of the elements together!");
 		convoManager = GameObject.Find("Conversation Manager").GetComponent<ConversationManager>();
 
         state = NPCState.Waiting;
