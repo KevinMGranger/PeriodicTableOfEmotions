@@ -374,7 +374,12 @@ MonoBehaviour:
   isDialogueOpen: 0
   isColliding: 0
   msLook: {fileID: 414315172}
+  trustPoints: 0
   zone: {fileID: 0}
+  state: 0
+  npcName: James
+  choice: 
+  correct: 0
 --- !u!114 &141064696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -797,13 +802,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68ec2fe99d1108b9d0006a298d76c639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  axes: 1
+  axes: 0
   sensitivityX: 4
   sensitivityY: 4
   minimumX: -360
   maximumX: 360
-  minimumY: 0
-  maximumY: 0
+  minimumY: -60
+  maximumY: 60
+  active: 1
 --- !u!143 &414315173
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1003,7 +1009,12 @@ MonoBehaviour:
   isDialogueOpen: 0
   isColliding: 0
   msLook: {fileID: 414315172}
+  trustPoints: 0
   zone: {fileID: 504337955}
+  state: 0
+  npcName: Kevin
+  choice: 
+  correct: 0
 --- !u!114 &504337955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1166,7 +1177,24 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 11400000, guid: 9d4133d5d30b644bd87802a347eaccbe, type: 2}
+      propertyPath: axes
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 9d4133d5d30b644bd87802a347eaccbe, type: 2}
+      propertyPath: minimumY
+      value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 9d4133d5d30b644bd87802a347eaccbe, type: 2}
+      propertyPath: maximumY
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 9d4133d5d30b644bd87802a347eaccbe, type: 2}
+      propertyPath: active
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 11400006, guid: 9d4133d5d30b644bd87802a347eaccbe, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 9d4133d5d30b644bd87802a347eaccbe, type: 2}
   m_RootGameObject: {fileID: 414315169}
   m_IsPrefabParent: 0
@@ -1765,6 +1793,10 @@ Prefab:
       propertyPath: msLook
       value: 
       objectReference: {fileID: 414315172}
+    - target: {fileID: 11445396, guid: 4ad6f8e9965595f4fb39557b0bb50e1b, type: 2}
+      propertyPath: npcName
+      value: James
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6545400, guid: 4ad6f8e9965595f4fb39557b0bb50e1b, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4ad6f8e9965595f4fb39557b0bb50e1b, type: 2}
@@ -2286,6 +2318,10 @@ Prefab:
       propertyPath: msLook
       value: 
       objectReference: {fileID: 414315172}
+    - target: {fileID: 11445396, guid: 4ad6f8e9965595f4fb39557b0bb50e1b, type: 2}
+      propertyPath: npcName
+      value: Kevin
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6545400, guid: 4ad6f8e9965595f4fb39557b0bb50e1b, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4ad6f8e9965595f4fb39557b0bb50e1b, type: 2}
@@ -2802,7 +2838,6 @@ GameObject:
   - 20: {fileID: 1865539584}
   - 92: {fileID: 1865539583}
   - 124: {fileID: 1865539582}
-  - 114: {fileID: 1865539581}
   - 81: {fileID: 1865539580}
   m_Layer: 0
   m_Name: Main Camera
@@ -2831,25 +2866,6 @@ AudioListener:
   m_PrefabInternal: {fileID: 569087657}
   m_GameObject: {fileID: 1865539578}
   m_Enabled: 1
---- !u!114 &1865539581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400006, guid: 9d4133d5d30b644bd87802a347eaccbe,
-    type: 2}
-  m_PrefabInternal: {fileID: 569087657}
-  m_GameObject: {fileID: 1865539578}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68ec2fe99d1108b9d0006a298d76c639, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  axes: 2
-  sensitivityX: 5
-  sensitivityY: 5
-  minimumX: 0
-  maximumX: 360
-  minimumY: -60
-  maximumY: 60
 --- !u!124 &1865539582
 Behaviour:
   m_ObjectHideFlags: 0

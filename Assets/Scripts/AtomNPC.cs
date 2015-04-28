@@ -1,13 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum NPCState
-{
-	Waiting,
-	Trusting,
-	Matched
-}
-
 public class AtomNPC : MonoBehaviour {
 
     // holds the charge of the NPC (Electron rotating number)
