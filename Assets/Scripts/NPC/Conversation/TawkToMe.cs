@@ -38,6 +38,7 @@ public class TawkToMe : MonoBehaviour {
         {
             npcName = "Generic";
         }
+		/*
         convo = new ConversationPoint("Hey! I'm " + npcName,
             new ResponseTree {
                 { "Hi, I'm Adom!", new ConversationPoint("So you want to try and match me right? Well here's the deal, I'll quiz you on chemistry. If you can get three correct answers, I'll give you more information on my nature. (Coming Soon)"
@@ -69,6 +70,7 @@ public class TawkToMe : MonoBehaviour {
                 { "Sup" + npcName, new ConversationPoint("nm, u?")}
               });
 		convoWin = new ConversationPoint ("Congratulations!!! You've matched all of the elements together!");
+		*/
 		convoManager = GameObject.Find("Conversation Manager").GetComponent<ConversationManager>();
 
         state = NPCState.Waiting;

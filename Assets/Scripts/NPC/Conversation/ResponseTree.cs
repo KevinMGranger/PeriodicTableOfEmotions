@@ -1,1 +1,0 @@
-﻿public class ResponseTree : System.Collections.Generic.Dictionary<string, ConversationPoint> { }

@@ -19,11 +19,6 @@ public class ConversationManager : MonoBehaviour {
 
     public string chosen;
 
-	// this is to kick off PopulateExampleConvo from the UI
-	// since you can't show a dictionary in the inspector easily
-    public bool demoMode;
-
-    [ContextMenuItem("Populate with example conversation", "PopulateExampleConvo")]
     public ConversationPoint conversationTree;
 
     public string GetText()
@@ -33,10 +28,6 @@ public class ConversationManager : MonoBehaviour {
 
     void Awake()
     {
-        if (demoMode)
-        {
-            PopulateExampleConvo();
-        }
     }
 
 	// Use this for initialization
@@ -49,7 +40,6 @@ public class ConversationManager : MonoBehaviour {
         box.Active = true;
         buttonMenu.gameObject.SetActive(true);
         setUI(conversationTree);
-
     }
 
     public void EndConvo()
@@ -79,7 +69,7 @@ public class ConversationManager : MonoBehaviour {
         clearDialogChildren();
 
         if (!newPoint.isLastWord)
-        foreach (var choice in newPoint.optionTree.Keys)
+        foreach (var choice in newPoint)
         {
             var button = Instantiate(choiceButtonProto) as ResponseButton;
             button.Response = choice;
@@ -97,23 +87,12 @@ public class ConversationManager : MonoBehaviour {
         }
     }
 
-    void PopulateExampleConvo()
-    {
-        conversationTree = new ConversationPoint(
-            "Is my electron kawaiiiiii~~~~~",
-            new ResponseTree {
-                { "Of course!", new ConversationPoint("Yay!") },
-                { "...no.", new ConversationPoint("Aww. You're mean.") }
-            });
-    }
-
     public void ChoiceSelected(string choice)
     {
         chosen = choice;
-        ConversationPoint next;
-        bool found = conversationTree.getNextPointFromResponse(choice, out next);
-        //Debug.Log(next.optionTree.Keys);
-        if (found)
+        ConversationPoint next = conversationTree[choice];
+
+        if (next != null)
         {
             conversationTree = next;
             box.Active = false;

@@ -2,9 +2,6 @@
 using UnityEngine.Events;
 using System.Collections.Generic;
 
-[System.Serializable]
-public class ChoiceSelected : UnityEvent<string> { }
-
 /// <summary>
 /// A conversation point is a node in a conversation tree.
 /// It has some text to be presented in a window, and a dictionary (ResponseTree)
@@ -15,11 +12,12 @@ public class ChoiceSelected : UnityEvent<string> { }
 /// You can also attach events to be fired as soon as this is presented, or closed,
 /// but those must be kicked off from the ConversationManager.
 /// </summary>
-public class ConversationPoint
+[System.Serializable]
+public class ConversationPoint : IEnumerable<ConversationOption>
 {
-    public string spokenText;
+    public string text;
 
-    public ResponseTree optionTree;
+    public ConversationOption[] options;
 
 	public UnityEvent onPresentText;
 	public UnityEvent onClosedText;
@@ -28,42 +26,72 @@ public class ConversationPoint
     {
         get
         {
-            return optionTree == null;
+            return options == null || options.Length == 0;
         }
     }
-    public ConversationPoint(string response, ResponseTree optionTree, UnityEvent onPresentText, UnityEvent onClosedText)
+    public ConversationPoint(string response, ConversationOption[] options, UnityEvent onPresentText, UnityEvent onClosedText)
     {
-        this.spokenText = response;
-        this.optionTree = optionTree;
+        this.text = response;
+        this.options = options;
         this.onPresentText = onPresentText;
         this.onClosedText = onClosedText;
     }
 
-    public ConversationPoint(string response, ResponseTree optionTree) : this(response, optionTree, new UnityEvent(), new UnityEvent()) { }
+    public ConversationPoint(string response, ConversationOption[] options) : this(response, options, new UnityEvent(), new UnityEvent()) { }
 
-    public ConversationPoint(string response) : this(response, null) { }
+    public ConversationPoint(string response, ConversationOption option) : this(response, new ConversationOption[] {option}, new UnityEvent(), new UnityEvent()) { }
+
+    public ConversationPoint(string response) : this(response, (ConversationOption[])null) { }
 
 	/// <summary>
-	/// Get the next conversation point based off of the given response.
+	/// Get the next conversation point from the given response.
 	/// </summary>
 	/// <param name="response"></param>
-	/// <param name="nextPoint"></param>
-	/// <returns>True if it was found successfully, false if not.</returns>
-    public bool getNextPointFromResponse(string response, out ConversationPoint nextPoint)
+	/// <returns>The next point or null if it couldn't be found.</returns>
+    public ConversationPoint getNextPointFromResponse(string response)
     {
-        if (optionTree != null)
-        {
-            return optionTree.TryGetValue(response, out nextPoint);
-        }
-        else
-        {
-            nextPoint = null;
-            return false;
-        }
+		foreach (var option in options)
+		{
+			if (option.text == response)
+			{
+				return option.nextPoint;
+			}
+		}
+
+		return null;
     }
+
+	/// <summary>
+	/// Get the next conversation point from the given response.
+	/// </summary>
+	/// <param name="value"></param>
+	/// <returns>The next point or null if it couldn't be found.</returns>
+	public ConversationPoint this[string value]
+	{
+		get
+		{
+			return getNextPointFromResponse(value);
+		}
+	}
 
     public override string ToString()
     {
-        return spokenText;
+        return text;
     }
+
+	public static implicit operator string(ConversationPoint cp)
+	{
+		return cp.ToString();
+	}
+
+
+	public IEnumerator<ConversationOption> GetEnumerator()
+	{
+		return ((IEnumerable<ConversationOption>)options).GetEnumerator();
+	}
+
+	System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+	{
+		return options.GetEnumerator();
+	}
 }
