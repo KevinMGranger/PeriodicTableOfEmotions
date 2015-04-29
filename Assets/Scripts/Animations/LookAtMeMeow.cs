@@ -9,7 +9,7 @@ public class LookAtMeMeow : MonoBehaviour
 	public Transform whoToRotate;
 
 	[Tooltip("How much one should dramatic chipmunk")]
-	public float rotationSpeed;
+	public float rotationSpeed = 0.5f;
 
 	/// <summary>
 	/// The time at which we should turn to face the player.
@@ -17,7 +17,7 @@ public class LookAtMeMeow : MonoBehaviour
 	float startTime;
 
 	[Tooltip("How long after entering my zone should I turn to face you?")]
-	public float delay;
+	public float delay = 0.4f;
 
 	void Awake()
 	{
@@ -30,13 +30,13 @@ public class LookAtMeMeow : MonoBehaviour
 
 	void OnTriggerEnter(Collider col)
 	{
-		if (IsPlayer(col))
+		if (col.IsPlayer())
 			StartTurn();
 	}
 
 	void OnTriggerStay(Collider col)
 	{
-		if (IsPlayer(col))
+		if (col.IsPlayer())
 			DoTurn(col.gameObject.transform);
 	}
 
@@ -63,15 +63,5 @@ public class LookAtMeMeow : MonoBehaviour
 			var time = (Time.time - startTime);
 
 			whoToRotate.rotation = Quaternion.Slerp(whoToRotate.rotation, rotationTarget, rotationSpeed * time);
-	}
-
-	/// <summary>
-	/// Determine if the given collider is from the player.
-	/// </summary>
-	/// <param name="col">The collider whose gameObject we should check</param>
-	/// <returns>True if it's the player, false if it's something else.</returns>
-	bool IsPlayer(Collider col)
-	{
-		return col.gameObject.tag == "Player";
 	}
 }

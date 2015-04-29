@@ -4,7 +4,6 @@ using System.Collections;
 
 public class MoveNPC : MonoBehaviour {
 	public Character player;
-	public TawkToMe ttm;
 
     // a bool meant to control the event's invoke. 
     public bool isMoving = false;
@@ -38,6 +37,7 @@ public class MoveNPC : MonoBehaviour {
 	}
     void InvokeFollow()
     {
+	/*
         // If the F key is pressed, the player will carry the object
 		if (Input.GetKeyDown(KeyCode.F) && isMoving == false && ttm.isColliding == true) {
 			isMoving = true;
@@ -58,6 +58,7 @@ public class MoveNPC : MonoBehaviour {
             this.transform.parent = null;
             this.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
+		*/
     }
     /// <summary>
     /// Checks to see if a match was made between two atoms

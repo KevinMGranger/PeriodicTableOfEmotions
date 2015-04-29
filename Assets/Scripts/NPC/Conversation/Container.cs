@@ -20,7 +20,7 @@ namespace Conversation
 
 		public static implicit operator Point(Container con)
 		{
-			return root;
+			return con.root;
 		}
 	}
 }

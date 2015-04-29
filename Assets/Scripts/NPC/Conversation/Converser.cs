@@ -34,7 +34,12 @@ namespace Conversation
 		[Tooltip("The material to set when presenting the converser in the UI.")]
 		public Material visual;
 
-		[Tooltip("The name to set when presenting the converser in the UI.")]
+		/// <summary>
+		/// The name to set when presenting the converser in the UI.
+		/// Leave blank to have the AtomNPC set it up
+		/// </summary>
+		[Tooltip("The name to set when presenting the converser in the UI.\n" +
+		"Leave blank to have the AtomNPC set it up")]
 		public string Name;
 
 		[Tooltip("The UI component to the conversation.\n" +
@@ -83,6 +88,8 @@ namespace Conversation
 
 		public void OptionChosen(Option op)
 		{
+			op.whenChosen.Invoke(op);
+
 			var next = currentLocation[op];
 
 			if (next == null)
