@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using System.Collections;
 // States of the NPC
-public enum NPCState
+public enum Sentiment
 {
-    Waiting,
+    NeverMet,
+    Met,
     Trusting,
     Matched
 }
+
 public class TawkToMe : MonoBehaviour {
 
 	public GameObject talkBubble;
@@ -14,23 +17,38 @@ public class TawkToMe : MonoBehaviour {
     public ConversationPoint convoTrust;
     public ConversationPoint convoWin;
 	public ConversationManager convoManager;
-	public bool isDialogueOpen = false;
-	public bool isColliding = false;
+
     public MouseLook msLook;
+
+    // Trust Points and Sentiment is directly tied. The state the NPC is in, is directly proportional to how much trust is between them. 
     public int trustPoints;
-    public NPCState state;
+    public Sentiment state;
 
     // Name of the NPC
     public string npcName;
 
-    // quiz variables
+    // choice made during quiz
     public string choice;
-    public bool correct;
 
 	public SpeechBubbleChanger sbc;
 
 	[ContextMenu("What input name do we ask the Input Manager about?")]
 	public string talkInputName = "Talk";
+
+    // Changes the NPC's sentimental feelings towards the player.
+    public UnityEvent changeEnumStateMet;
+    public UnityEvent changeEnumStateTrust;
+    public UnityEvent changeEnumStateMatched;
+
+    [HideInInspector]
+    // Self explanatory, but basically does a check to see if dialogue is open. Used to avoid bugs when the dialogue has never been opened. 
+    public bool isDialogueOpen = false;
+    [HideInInspector]
+    // Isn't really used here, but in other scripts they can reference this if they want to do something with it. 
+    public bool isColliding = false;
+    [HideInInspector]
+    // whether or not a choice was correct from the quiz
+    public bool correct;
 
 	// Use this for initialization
 	void Awake() {
@@ -73,7 +91,7 @@ public class TawkToMe : MonoBehaviour {
 		*/
 		convoManager = GameObject.Find("Conversation Manager").GetComponent<ConversationManager>();
 
-        state = NPCState.Waiting;
+        state = Sentiment.NeverMet;
         trustPoints = 0;
 	}
 	void Start () {
@@ -87,19 +105,8 @@ public class TawkToMe : MonoBehaviour {
             choice = convoManager.GetText();
         }
         CheckDialogue();
-        if (trustPoints >= 1)
-        {
-            state = NPCState.Trusting;
-        }
-        if (state == NPCState.Waiting)
-        {
-            convoManager.conversationTree = convo;
-        }
-        else if (state == NPCState.Trusting)
-        {
-            convoManager.conversationTree = convoTrust;
-        }
-        //Debug.Log(state);
+        // call the event in the update
+        InvokeEvent();
 	}
 
 
@@ -119,6 +126,12 @@ public class TawkToMe : MonoBehaviour {
             convoManager.StartConvo();
 			isDialogueOpen = true;
 		}
+        // for testing purposes
+        if(Input.GetButtonDown("RaiseTrust") && col.gameObject.name == "Player")
+        {
+            Debug.Log(trustPoints + 1);
+            trustPoints += 1;
+        }
 	}
 
 	void OnTriggerExit(Collider col)
@@ -135,6 +148,9 @@ public class TawkToMe : MonoBehaviour {
 			isDialogueOpen = false;
 		}
 	}
+    /// <summary>
+    /// A dialogue check to see if a decision should change the NPC's opinion of the player.
+    /// </summary>
     public void CheckDialogue()
     {
         // if the choice is valid, raise trust Points.
@@ -156,6 +172,36 @@ public class TawkToMe : MonoBehaviour {
             trustPoints++;
             correct = !correct;
             convoManager.chosen = null;
+        }
+    }
+    /// <summary>
+    /// This class is meant to be invoked when trust points reach the correct value. 
+    /// It will then allow the NPC to have different behaviors depending on it's enum state.
+    /// </summary>
+    public void SentimentChangeMet()
+    {
+        state = Sentiment.Met;
+        Debug.Log(state);
+    }
+    public void SentimentChangeTrust()
+    {
+        state = Sentiment.Trusting;
+        Debug.Log(state);
+    }
+    public void SentimentChangeMatched()
+    {
+        state = Sentiment.Matched;
+    }
+
+    public void InvokeEvent()
+    {
+        if (trustPoints >= 2)
+        {
+            changeEnumStateTrust.Invoke();
+        }
+        else if (trustPoints >= 1)
+        {
+            changeEnumStateMet.Invoke();
         }
     }
 }

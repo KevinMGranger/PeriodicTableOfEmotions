@@ -54,13 +54,13 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Fire2
-    descriptiveName: 
-    descriptiveNegativeName: 
+    m_Name: RaiseTrust
+    descriptiveName: Raise trust awareness for science!!!!
+    descriptiveNegativeName: From viewers like you, thank you.
     negativeButton: 
-    positiveButton: left alt
+    positiveButton: k
     altNegativeButton: 
-    altPositiveButton: mouse 1
+    altPositiveButton: 
     gravity: 1000
     dead: .00100000005
     sensitivity: 1000
@@ -173,6 +173,22 @@ InputManager:
     positiveButton: enter
     altNegativeButton: 
     altPositiveButton: space
+    gravity: 1000
+    dead: .00100000005
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Cancel
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: escape
+    altNegativeButton: 
+    altPositiveButton: joystick button 1
     gravity: 1000
     dead: .00100000005
     sensitivity: 1000
