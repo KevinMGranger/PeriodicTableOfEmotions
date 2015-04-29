@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using System.Collections;
 
 public class MoveNPC : MonoBehaviour {
 	public Character player;
 	public TawkToMe ttm;
+    public UnityEvent followMe;
 	public bool isMoving = false;
 	// Use this for initialization
 	void Start () {
@@ -19,10 +21,13 @@ public class MoveNPC : MonoBehaviour {
 			isMoving = false;
 		}
 		if (isMoving == true) {
-			followPlayer ();
+            followMe.Invoke();
 		}
 
 	}
+    /// <summary>
+    /// If the distance between the player and the gameObject is too large, transform the gameObject towards the player. 
+    /// </summary>
 	void followPlayer()
 	{
 		// Follow the player here
@@ -34,4 +39,11 @@ public class MoveNPC : MonoBehaviour {
 			transform.rotation = startingRotation;
 		}
 	}
+    /// <summary>
+    /// 
+    /// </summary>
+    void checkMatch()
+    {
+
+    }
 }
