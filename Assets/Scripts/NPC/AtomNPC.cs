@@ -66,19 +66,50 @@ namespace NPC
 		}
 		#endregion
 
+        Converser convo;
+
+        public SpeechBubbleChanger sbc;
+
 		void Start()
 		{
 			// if convo, set name
-			var convo = GetComponent<Converser>();
-			if (convo)
-			{
+            this.CheckComponent(ref convo);
 				if (convo.Name.Length == 0) convo.Name = NPC_Name;
-			}
+
+                this.CheckComponentInChildren(ref sbc);
 		}
 
 		void Update()
 		{
 		}
+
+        void OnTriggerEnter(Collider col)
+        {
+            if (col.IsPlayer())
+            {
+                sbc.gameObject.SetActive(true);
+            }
+        }
+
+        void OnTriggerStay(Collider col)
+        {
+            if (col.IsPlayer() && Input.GetKeyDown(KeyCode.E))
+            {
+                convo.EnableConversation();
+                col.gameObject.GetComponent<Character>().EnableConversation();
+            }
+        }
+
+        void OnTriggerExit(Collider col)
+        {
+            if (col.IsPlayer())
+            {
+                convo.LeaveConversation();
+                col.gameObject.GetComponent<Character>().LeaveConversation();
+                sbc.gameObject.SetActive(false);
+            }
+        }
+
 	}
 }
 /*

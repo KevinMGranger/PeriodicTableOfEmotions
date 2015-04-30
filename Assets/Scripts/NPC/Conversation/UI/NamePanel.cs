@@ -17,6 +17,11 @@ namespace Conversation
 			}
 		}
 
+        void Awake()
+        {
+            this.CheckComponentInChildren(ref txt);
+        }
+
 		void Start() { }
 
 		void Update() { }

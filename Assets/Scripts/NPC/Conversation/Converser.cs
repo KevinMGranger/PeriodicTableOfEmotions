@@ -48,11 +48,16 @@ namespace Conversation
 
 		void Awake()
 		{
-			if (!conversation)
-				if (!(conversation = GetComponent<Container>()))
-				{
-					Debug.LogError("Couldn't find Conversation container!");
-				}
+            if (!conversation)
+            {
+                if (!(conversation = GetComponent<Container>()))
+                {
+                    Debug.LogError("Couldn't find Conversation container!");
+                }
+            }
+
+            root = conversation;
+            currentLocation = root;
 
 			if (!visual) Debug.LogWarning("No visual for Converser, is this intentional?");
 

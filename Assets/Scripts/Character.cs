@@ -36,11 +36,15 @@ public class Character : MonoBehaviour
 	public PlayerState playerState;
 	public MatchingState matchingState;
 
+    MouseLook ml;
+
     // Use this for initialization
     void Start()
     {
 		playerState = PlayerState.walking;
 		matchingState = MatchingState.notMatching;
+
+        this.CheckComponent(ref ml);
     }
 
     // Update is called once per frame
@@ -100,5 +104,15 @@ public class Character : MonoBehaviour
 			}
 			*/
 		}
+    }
+
+    public void EnableConversation()
+    {
+        ml.enabled = false;
+    }
+
+    public void LeaveConversation()
+    {
+        ml.enabled = true;
     }
 }
