@@ -1,17 +1,20 @@
 ﻿using UnityEngine;
 
-public class ElectronShell : MonoBehaviour
+namespace Animation
 {
-	public float speed;
-
-	Vector3 rotationToApply;
-
-	void Start() { }
-
-	void Update()
+	public class ElectronShell : MonoBehaviour
 	{
-		rotationToApply.z = speed * Time.deltaTime;
+		public float speed;
 
-		transform.Rotate(rotationToApply);
+		Vector3 rotationToApply;
+
+		void Start() { }
+
+		void Update()
+		{
+			rotationToApply.z = speed * Time.deltaTime;
+
+			transform.Rotate(rotationToApply);
+		}
 	}
 }

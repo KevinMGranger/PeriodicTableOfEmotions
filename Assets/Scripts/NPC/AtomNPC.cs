@@ -34,7 +34,7 @@ namespace NPC
 	public class AtomNPC : MonoBehaviour
 	{
 		// Name of the NPC
-		public string npcName = "A Generic Atom";
+		public string NPC_Name = "A Generic Atom";
 
 		#region State
 		[SerializeField]
@@ -72,7 +72,7 @@ namespace NPC
 			var convo = GetComponent<Converser>();
 			if (convo)
 			{
-				if (convo.Name.Length == 0) convo.Name = npcName;
+				if (convo.Name.Length == 0) convo.Name = NPC_Name;
 			}
 		}
 
