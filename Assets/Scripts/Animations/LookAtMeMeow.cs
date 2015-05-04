@@ -34,7 +34,9 @@ namespace Animation
 		void OnTriggerEnter(Collider col)
 		{
 			if (col.IsPlayer())
+			{
 				StartTurn();
+			}
 		}
 
 		void OnTriggerStay(Collider col)

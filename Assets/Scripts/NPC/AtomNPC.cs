@@ -38,7 +38,7 @@ namespace NPC
 
 		#region State
 		[SerializeField]
-		private State state;
+		public State state;
 		public AtomStateChanged onStateChange;
 		public State State
 		{
@@ -53,7 +53,7 @@ namespace NPC
 
 		#region Sentiment
 		[SerializeField]
-		private Sentiment sentiment;
+		public Sentiment sentiment;
 		public AtomSentimentChanged onSentimentChange;
 		public Sentiment Sentiment
 		{
