@@ -96,7 +96,7 @@ public class SpeechBubbleChanger : MonoBehaviour
 	/// Set material based off of given state.
 	/// </summary>
 	/// <param name="state"></param>
-	void SetMaterial(SpeechBubbleState state)
+	public void SetMaterial(SpeechBubbleState state)
 	{
 		switch (state)
 		{
@@ -131,7 +131,7 @@ public class SpeechBubbleChanger : MonoBehaviour
 
 	public void SetAlternating(SpeechBubbleState alternate, string text)
 	{
-		Debug.Log("sb alternating");
+		//Debug.Log("sb alternating");
 		this.state = SpeechBubbleState.AlternatingText;
 		this.alternate = alternate;
 		this.text = text;

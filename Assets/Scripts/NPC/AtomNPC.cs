@@ -84,10 +84,6 @@ namespace NPC
 
 		void Update()
 		{
-			if (sentiment == Sentiment.Met) 
-			{
-				convo.conversation = GameObject.Find("Generic Quiz").GetComponent<Container>();
-			}
 			// Edited for the sake of having a conversation system
 			option = convo.texter;
 		}
@@ -96,7 +92,6 @@ namespace NPC
         {
             if (col.IsPlayer())
             {
-				convo.enabled = true;
                 sbc.gameObject.SetActive(true);
             }
         }
@@ -108,10 +103,8 @@ namespace NPC
                 convo.EnableConversation();
                 col.gameObject.GetComponent<Character>().EnableConversation();
             }
-			if (option == "Yeah that's right") 
-			{
-				sentiment = Sentiment.Met;
-			}
+
+			conversationManager ();
 
         }
 
@@ -123,6 +116,37 @@ namespace NPC
 				col.gameObject.GetComponent<Character> ().LeaveConversation ();
 				sbc.gameObject.SetActive (false);
 				convo.UpdateConversation();
+			}
+		}
+
+		// Only made because I needed a quick workaround to "When Chosen" - Sung
+		void conversationManager()
+		{
+			// Conversation placeholder, manages state change
+			if (option == "Yeah that's right") {
+				sentiment = Sentiment.Met;
+			} 
+			else if (option == "Study of matter")
+			{
+				sentiment = Sentiment.Trusting;
+			} 
+			else if (option == "Antoine Lavoisier")
+			{
+				sentiment = Sentiment.Trusting;
+			}
+
+			// Change the conversations around
+			if (sentiment == Sentiment.Met && this.gameObject.name == "Atom") {
+				convo.conversation = GameObject.Find ("Quiz").GetComponent<Container> ();
+			}
+			else if (sentiment == Sentiment.Met && this.gameObject.name == "Atom2") 
+			{
+				convo.conversation = GameObject.Find ("Quiz2").GetComponent<Container> ();
+			}
+			if (sentiment == Sentiment.Trusting)
+			{
+				sbc.SetAlternating(SpeechBubbleState.Exclaim,"F");
+				convo.conversation = GameObject.Find("Generic Trust").GetComponent<Container>();
 			}
 		}
 	}
