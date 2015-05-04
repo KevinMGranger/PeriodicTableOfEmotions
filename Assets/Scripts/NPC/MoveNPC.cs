@@ -11,6 +11,8 @@ namespace NPC
 
 		// a bool meant to control the event's invoke. 
 		public bool isMoving = false;
+		public bool playerHere = false;
+		public bool isMatched = false;
 
 		[ContextMenu("Is the object following the player?")]
 		public UnityEvent followMe;
@@ -24,54 +26,69 @@ namespace NPC
 		{
 			InvokeFollow();
 		}
+
+		void OnTriggerEnter(Collider col)
+		{
+			if(col.gameObject.tag == "Player")
+			{
+				playerHere = true;
+			}
+			if(col.gameObject.tag == "Atom")
+			{
+				if(col.gameObject.GetComponent<AtomNPC>().sentiment == Sentiment.Trusting && col.gameObject.GetComponent<AtomNPC>().state != State.InLove)
+				{
+					this.gameObject.GetComponent<AtomNPC>().state = State.InLove;
+					col.gameObject.GetComponent<AtomNPC>().state = State.InLove;
+					isMatched = true;
+					col.gameObject.GetComponent<MoveNPC>().isMatched = true;
+					isMoving = false;
+				}
+			}
+		}
+
+		void OnTriggerExit(Collider col)
+		{
+			if(col.gameObject.tag == "Player")
+			{
+				playerHere = false;
+			}
+		}
+
 		/// <summary>
 		/// If the distance between the player and the gameObject is too large, transform the gameObject towards the player. 
 		/// </summary>
 		public void followPlayer()
 		{
 			// This object's parent is the player.
-			this.transform.parent = player.gameObject.transform;
-			/*
-			if((Vector3.Distance(this.transform.position, player.gameObject.transform.position)) > 1.7f)
+			if((Vector3.Distance(this.transform.position, player.gameObject.transform.position)) > 3.0f)
 			{
 				Quaternion startingRotation = transform.rotation;
 				transform.LookAt(player.transform.position);
 				transform.Translate(Vector3.forward * 0.1f);
 				transform.rotation = startingRotation;
 			}
-			 */
 		}
 		void InvokeFollow()
 		{
-			/*
 				// If the F key is pressed, the player will carry the object
-				if (Input.GetKeyDown(KeyCode.F) && isMoving == false && ttm.isColliding == true) {
+				if (Input.GetKeyDown(KeyCode.F) && !isMoving && playerHere && !isMatched) {
 					isMoving = true;
 				}
 				// if the G key is pressed, the player will release the object.
-				else if (Input.GetKeyDown(KeyCode.G) && isMoving == true)
+				else if (Input.GetKeyDown(KeyCode.G) && isMoving == true || isMatched)
 				{
 					isMoving = false;
 				}
 				// This will invoke the event as long as the player pressed the F key. 
 				if (isMoving == true)
 				{
-					followMe.Invoke();
+					//followMe.Invoke();
+					followPlayer ();
 				}
 				// if the player releases the object, isMoving is then false so the object is allowed to stop. 
-				else
-				{
-					this.transform.parent = null;
-					this.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-				}
-				*/
 		}
 		/// <summary>
 		/// Checks to see if a match was made between two atoms
 		/// </summary>
-		void checkMatch()
-		{
-
-		}
 	}
 }
