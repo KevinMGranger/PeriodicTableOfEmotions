@@ -90,7 +90,10 @@ namespace Conversation
 		{
 			ui.LeaveConversation();
 		}
-
+		public void ResetConversation()
+		{
+			currentLocation = root;
+		}
 		public void OptionChosen(Option op)
 		{
 			op.whenChosen.Invoke();

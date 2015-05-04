@@ -2240,7 +2240,7 @@ GameObject:
   - 4: {fileID: 1418171532}
   - 114: {fileID: 1418171531}
   m_Layer: 0
-  m_Name: Generic Quiz
+  m_Name: Generic Convo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2258,33 +2258,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   root:
-    text: CHEMISTRY
+    text: Hi, how are you?
     options:
-    - text: k
+    - text: Doing alright
       nextPoint:
-        text: poop?
+        text: Good! I hear you want to match people.
         options:
-        - text: yeh
+        - text: Yeah that's right
           nextPoint:
-            text: 
+            text: I want to be matched too! I don't know if I can trust you yet though...
             options: []
           whenChosen:
             m_PersistentCalls:
               m_Calls: []
             m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0,
               Culture=neutral, PublicKeyToken=null
-        - text: neh
+        - text: Nah, not you
           nextPoint:
-            text: 
-            options: []
-          whenChosen:
-            m_PersistentCalls:
-              m_Calls: []
-            m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0,
-              Culture=neutral, PublicKeyToken=null
-        - text: peh
-          nextPoint:
-            text: 
+            text: Bye!!!
             options: []
           whenChosen:
             m_PersistentCalls:

@@ -105,6 +105,7 @@ namespace NPC
             if (col.IsPlayer())
             {
                 convo.LeaveConversation();
+				convo.ResetConversation();
                 col.gameObject.GetComponent<Character>().LeaveConversation();
                 sbc.gameObject.SetActive(false);
             }
