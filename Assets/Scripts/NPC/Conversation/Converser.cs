@@ -21,6 +21,11 @@ namespace Conversation
 		/// </summary>
 		Point currentLocation;
 
+		/// <summary>
+		/// The text to manage dialogue because Kevin's event system is broken.
+		/// </summary>
+		public string texter;
+
 		public Option[] options
 		{
 			get { return currentLocation.options; }
@@ -79,7 +84,9 @@ namespace Conversation
 
 		void Start() { }
 
-		void Update() { }
+		void Update() 
+		{
+		}
 
 		public void EnableConversation()
 		{
@@ -97,9 +104,9 @@ namespace Conversation
 		public void OptionChosen(Option op)
 		{
 			op.whenChosen.Invoke();
-
 			var next = currentLocation[op];
-
+			string me = op.ToString ();
+			texter = me;
 			if (next == null)
 			{
 				Debug.LogError("Got option I don't know about: " + op);
@@ -109,6 +116,12 @@ namespace Conversation
 			currentLocation = next;
 
 			EnableConversation();
+		}
+
+		public void UpdateConversation()
+		{
+			root = conversation;
+			currentLocation = root;
 		}
 	}
 }
