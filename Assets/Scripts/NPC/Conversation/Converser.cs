@@ -32,7 +32,7 @@ namespace Conversation
 		}
 
 		[Tooltip("The material to set when presenting the converser in the UI.")]
-		public Material visual;
+		public Sprite visual;
 
 		/// <summary>
 		/// The name to set when presenting the converser in the UI.
@@ -93,7 +93,7 @@ namespace Conversation
 
 		public void OptionChosen(Option op)
 		{
-			op.whenChosen.Invoke(op);
+			op.whenChosen.Invoke();
 
 			var next = currentLocation[op];
 

@@ -18,9 +18,9 @@ namespace Conversation
 
         void Update() { }
 
-        public void SetImage(Material mat)
+        public void SetImage(Sprite mat)
         {
-            img.material = mat;
+            img.sprite = mat;
         }
     }
 }

@@ -34,7 +34,7 @@ namespace Conversation
 		public void EnableConversation(Converser con)
 		{
             can.enabled = true;
-			namePanel.SetName(con.name);
+			namePanel.SetName(con.Name);
 			options.SetOptions(con, con.options);
 			dialogBox.SetText(con.text);
             pic.SetImage(con.visual);
@@ -43,7 +43,7 @@ namespace Conversation
 		public void LeaveConversation()
 		{
 			namePanel.LeaveConversation();
-            can.enabled = true;
+            can.enabled = false;
 		}
 	}
 }

@@ -21,9 +21,6 @@ namespace Conversation
 
 		public Option[] options;
 
-		public UnityEvent onPresentText;
-		public UnityEvent onClosedText;
-
 		public bool isLastWord
 		{
 			get
@@ -31,17 +28,13 @@ namespace Conversation
 				return options == null || options.Length == 0;
 			}
 		}
-		public Point(string response, Option[] options, UnityEvent onPresentText, UnityEvent onClosedText)
+		public Point(string response, Option[] options)
 		{
 			this.text = response;
 			this.options = options;
-			this.onPresentText = onPresentText;
-			this.onClosedText = onClosedText;
 		}
 
-		public Point(string response, Option[] options) : this(response, options, new UnityEvent(), new UnityEvent()) { }
-
-		public Point(string response, Option option) : this(response, new Option[] { option }, new UnityEvent(), new UnityEvent()) { }
+		public Point(string response, Option option) : this(response, new Option[] { option }) { }
 
 		public Point(string response) : this(response, (Option[])null) { }
 

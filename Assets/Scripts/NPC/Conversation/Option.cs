@@ -3,9 +3,6 @@ using UnityEngine.Events;
 
 namespace Conversation
 {
-
-	public class OptionChosen : UnityEvent<Option> { }
-
 	/// <summary>
 	/// A conversation option is a branch to be presented in a conversation tree.
 	/// </summary>
@@ -14,13 +11,17 @@ namespace Conversation
 	{
 		public string text;
 		public Point nextPoint;
-		public OptionChosen whenChosen;
+		public UnityEvent whenChosen;
 
-		public Option(string text, Point nextPoint)
+		public Option(string text, Point nextPoint, UnityEvent whenChosen)
 		{
 			this.text = text;
 			this.nextPoint = nextPoint;
+			this.whenChosen = whenChosen;
 		}
+
+		public Option(string text, Point nextPoint): this(text, nextPoint, new UnityEvent()) { }
+
 
 		public override string ToString()
 		{
