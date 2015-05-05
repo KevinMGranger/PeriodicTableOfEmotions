@@ -82,6 +82,8 @@ namespace NPC
                 this.CheckComponentInChildren(ref sbc);
 		}
 
+		bool isTrusting = false;
+
 		void Update()
 		{
 			// Edited for the sake of having a conversation system
@@ -114,7 +116,10 @@ namespace NPC
 				convo.LeaveConversation ();
 				convo.ResetConversation ();
 				col.gameObject.GetComponent<Character> ().LeaveConversation ();
-				sbc.gameObject.SetActive (false);
+				if(state != State.InLove)
+				{
+					sbc.gameObject.SetActive (false);
+				}
 				convo.UpdateConversation();
 			}
 		}
@@ -123,14 +128,23 @@ namespace NPC
 		void conversationManager()
 		{
 			// Conversation placeholder, manages state change
-			if (option == "Yeah that's right") {
+			if (option == "Yeah that's right") 
+			{
 				sentiment = Sentiment.Met;
 			} 
 			else if (option == "Study of matter")
 			{
 				sentiment = Sentiment.Trusting;
 			} 
-			else if (option == "Antoine Lavoisier")
+			else if (option == "Antoine Lavoisier") 
+			{
+				sentiment = Sentiment.Trusting;
+			}
+			else if (option == "Protons, Neutrons, and Electrons")
+			{
+				sentiment = Sentiment.Trusting;
+			} 
+			else if (option == "Hydrogen") 
 			{
 				sentiment = Sentiment.Trusting;
 			}
@@ -143,11 +157,30 @@ namespace NPC
 			{
 				convo.conversation = GameObject.Find ("Quiz2").GetComponent<Container> ();
 			}
-			if (sentiment == Sentiment.Trusting)
+			else if (sentiment == Sentiment.Met && this.gameObject.name == "Atom3") 
 			{
-				sbc.SetAlternating(SpeechBubbleState.Exclaim,"F");
-				convo.conversation = GameObject.Find("Generic Trust").GetComponent<Container>();
+				convo.conversation = GameObject.Find ("Quiz3").GetComponent<Container> ();
 			}
+			else if (sentiment == Sentiment.Met && this.gameObject.name == "Atom4") 
+			{
+				convo.conversation = GameObject.Find ("Quiz4").GetComponent<Container> ();
+			}
+			if (sentiment == Sentiment.Trusting) 
+			{
+				if(isTrusting == false)
+				{
+					sbc.SetAlternating(SpeechBubbleState.Exclaim, "F");
+					convo.conversation = GameObject.Find("Generic Trust").GetComponent<Container>();
+					isTrusting = true;
+				}
+			}
+		}
+
+		public void Match()
+		{
+			sbc.SetState (SpeechBubbleState.Heart);
+			sbc.text = "";
+			sbc.gameObject.SetActive(true);
 		}
 	}
 }

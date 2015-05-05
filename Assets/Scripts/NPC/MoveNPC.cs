@@ -41,7 +41,8 @@ namespace NPC
 					col.gameObject.GetComponent<AtomNPC>().state = State.InLove;
 					isMatched = true;
 					col.gameObject.GetComponent<MoveNPC>().isMatched = true;
-					isMoving = false;
+					this.gameObject.GetComponent<AtomNPC>().Match();
+					col.gameObject.GetComponent<AtomNPC>().Match();
 				}
 			}
 		}
@@ -71,21 +72,22 @@ namespace NPC
 		void InvokeFollow()
 		{
 				// If the F key is pressed, the player will carry the object
-				if (Input.GetKeyDown(KeyCode.F) && !isMoving && playerHere && !isMatched) {
-					isMoving = true;
-				}
-				// if the G key is pressed, the player will release the object.
-				else if (Input.GetKeyDown(KeyCode.G) && isMoving == true || isMatched)
-				{
-					isMoving = false;
-				}
-				// This will invoke the event as long as the player pressed the F key. 
-				if (isMoving == true)
-				{
-					//followMe.Invoke();
-					followPlayer ();
-				}
-				// if the player releases the object, isMoving is then false so the object is allowed to stop. 
+			if (Input.GetKeyDown(KeyCode.F) && !isMoving && playerHere && !isMatched && this.gameObject.GetComponent<AtomNPC>().sentiment == Sentiment.Trusting) 
+			{
+				isMoving = true;
+			}
+			// if the G key is pressed, the player will release the object.
+			else if (Input.GetKeyDown(KeyCode.G) && isMoving == true || isMatched)
+			{
+				isMoving = false;
+			}
+			// This will invoke the event as long as the player pressed the F key. 
+			if (isMoving == true)
+			{
+				//followMe.Invoke();
+				followPlayer ();
+			}
+			// if the player releases the object, isMoving is then false so the object is allowed to stop. 
 		}
 		/// <summary>
 		/// Checks to see if a match was made between two atoms

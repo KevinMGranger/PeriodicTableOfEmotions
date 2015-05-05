@@ -35,7 +35,7 @@ public class SpeechBubbleChanger : MonoBehaviour
 	/// <summary>
 	/// Change state, altering the material as needed
 	/// </summary>
-	void SetState(SpeechBubbleState newState)
+	public void SetState(SpeechBubbleState newState)
 	{
 		state = newState;
 		SetMaterial(newState);
@@ -54,7 +54,7 @@ public class SpeechBubbleChanger : MonoBehaviour
 	[ContextMenu("Text to use to alternate if not specified when called")]
 	public string initialText;
 
-	string text
+	public string text
 	{
 		get
 		{
@@ -90,7 +90,7 @@ public class SpeechBubbleChanger : MonoBehaviour
 	/// <summary>
 	/// When should we next switch?
 	/// </summary>
-	float nextTime;
+	public float nextTime;
 
 	/// <summary>
 	/// Set material based off of given state.
@@ -135,6 +135,8 @@ public class SpeechBubbleChanger : MonoBehaviour
 		this.state = SpeechBubbleState.AlternatingText;
 		this.alternate = alternate;
 		this.text = text;
+
+		initialText = text;
 
 		onText = false;
 		SetMaterial(alternate);
