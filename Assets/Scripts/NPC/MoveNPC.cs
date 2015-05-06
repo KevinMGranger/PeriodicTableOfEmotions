@@ -35,7 +35,7 @@ namespace NPC
 			}
 			if(col.gameObject.tag == "Atom")
 			{
-				if(col.gameObject.GetComponent<AtomNPC>().sentiment == Sentiment.Trusting && col.gameObject.GetComponent<AtomNPC>().state != State.InLove)
+				if(isMoving == true && col.gameObject.GetComponent<AtomNPC>().sentiment == Sentiment.Trusting && col.gameObject.GetComponent<AtomNPC>().state != State.InLove)
 				{
 					this.gameObject.GetComponent<AtomNPC>().state = State.InLove;
 					col.gameObject.GetComponent<AtomNPC>().state = State.InLove;
