@@ -72,6 +72,9 @@ namespace NPC
         Converser convo;
 
         public SpeechBubbleChanger sbc;
+				
+		bool isTrusting = false;
+		public bool convoOpen = false;
 
 		void Start()
 		{
@@ -81,8 +84,6 @@ namespace NPC
 
                 this.CheckComponentInChildren(ref sbc);
 		}
-
-		bool isTrusting = false;
 
 		void Update()
 		{
@@ -100,27 +101,48 @@ namespace NPC
 
         void OnTriggerStay(Collider col)
         {
-            if (col.IsPlayer() && Input.GetKeyDown(KeyCode.E))
-            {
-                convo.EnableConversation();
-                col.gameObject.GetComponent<Character>().EnableConversation();
-            }
-
+			if (col.IsPlayer () && Input.GetKeyDown (KeyCode.E) && convoOpen == false) {
+				convo.EnableConversation ();
+				col.gameObject.GetComponent<Character> ().EnableConversation ();
+				convoOpen = true;
+			}
+			else {
+				if (option == "Bye" && col.IsPlayer()) 
+				{
+					convo.LeaveConversation ();
+					col.gameObject.GetComponent<Character>().LeaveConversation();
+					convo.ResetConversation ();
+					convo.UpdateConversation();
+					convoOpen = false;
+					convo.texter = null;
+				}
+				else if (option == "Great!" && col.IsPlayer()) 
+				{
+					convo.LeaveConversation ();
+					col.gameObject.GetComponent<Character>().LeaveConversation();
+					convo.ResetConversation ();
+					convo.UpdateConversation();
+					convoOpen = false;
+					convo.texter = null;
+				}
+			}
 			conversationManager ();
+
 
         }
 
         void OnTriggerExit(Collider col)
         {
-			if (col.IsPlayer ()) {
+			if (col.IsPlayer () && convoOpen == true) {
 				convo.LeaveConversation ();
 				convo.ResetConversation ();
 				col.gameObject.GetComponent<Character> ().LeaveConversation ();
-				if(state != State.InLove)
-				{
-					sbc.gameObject.SetActive (false);
-				}
 				convo.UpdateConversation();
+				convoOpen = false;
+			}
+			if(state != State.InLove)
+			{
+				sbc.gameObject.SetActive (false);
 			}
 		}
 
@@ -128,11 +150,8 @@ namespace NPC
 		void conversationManager()
 		{
 			// Conversation placeholder, manages state change
-			if (option == "Yeah that's right") 
-			{
-				sentiment = Sentiment.Met;
-			} 
-			else if (option == "Study of matter")
+			// This way is abhorant but it's the best we can do right now. 
+			if (option == "Study of Matter")
 			{
 				sentiment = Sentiment.Trusting;
 			} 
@@ -140,7 +159,7 @@ namespace NPC
 			{
 				sentiment = Sentiment.Trusting;
 			}
-			else if (option == "Protons, Neutrons, and Electrons")
+			else if (option == "Electrons, Neutrons, and Protons")
 			{
 				sentiment = Sentiment.Trusting;
 			} 
@@ -150,21 +169,6 @@ namespace NPC
 			}
 
 			// Change the conversations around
-			if (sentiment == Sentiment.Met && this.gameObject.name == "Atom") {
-				convo.conversation = GameObject.Find ("Quiz").GetComponent<Container> ();
-			}
-			else if (sentiment == Sentiment.Met && this.gameObject.name == "Atom2") 
-			{
-				convo.conversation = GameObject.Find ("Quiz2").GetComponent<Container> ();
-			}
-			else if (sentiment == Sentiment.Met && this.gameObject.name == "Atom3") 
-			{
-				convo.conversation = GameObject.Find ("Quiz3").GetComponent<Container> ();
-			}
-			else if (sentiment == Sentiment.Met && this.gameObject.name == "Atom4") 
-			{
-				convo.conversation = GameObject.Find ("Quiz4").GetComponent<Container> ();
-			}
 			if (sentiment == Sentiment.Trusting) 
 			{
 				if(isTrusting == false)
