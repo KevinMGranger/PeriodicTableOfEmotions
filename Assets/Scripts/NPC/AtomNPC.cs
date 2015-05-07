@@ -74,7 +74,8 @@ namespace NPC
         public SpeechBubbleChanger sbc;
 				
 		bool isTrusting = false;
-		public bool convoOpen = false;
+		bool convoOpen = false;
+		bool isFollowing = false;
 
 		void Start()
 		{
@@ -106,20 +107,22 @@ namespace NPC
 				col.gameObject.GetComponent<Character> ().EnableConversation ();
 				convoOpen = true;
 			}
-			if (col.IsPlayer () && Input.GetKeyDown (KeyCode.F) && convoOpen == false) {
+			if (col.IsPlayer () && Input.GetKeyDown (KeyCode.F) && !convoOpen && isTrusting) {
 				convo.conversation = GameObject.Find("Follow").GetComponent<Container>();
 				convo.ResetConversation ();
 				convo.UpdateConversation();
 				convo.EnableConversation ();
 				col.gameObject.GetComponent<Character> ().EnableConversation ();
-				convoOpen = true;
+				isFollowing = true;
 			}
-			if (col.IsPlayer () && Input.GetKeyDown (KeyCode.G) && convoOpen == true) {
-				convo.LeaveConversation ();
+			if (col.IsPlayer () && Input.GetKeyDown (KeyCode.G) && isFollowing) {
+				convo.conversation = GameObject.Find("Drop").GetComponent<Container>();
 				convo.ResetConversation ();
-				col.gameObject.GetComponent<Character> ().LeaveConversation ();
 				convo.UpdateConversation();
-				convoOpen = false;
+				convo.EnableConversation ();
+				col.gameObject.GetComponent<Character> ().EnableConversation ();
+				convoOpen = true;
+				isFollowing = false;
 			}
 			else {
 				if (option == "->" && col.IsPlayer()) 
