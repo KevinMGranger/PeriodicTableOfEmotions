@@ -106,8 +106,23 @@ namespace NPC
 				col.gameObject.GetComponent<Character> ().EnableConversation ();
 				convoOpen = true;
 			}
+			if (col.IsPlayer () && Input.GetKeyDown (KeyCode.F) && convoOpen == false) {
+				convo.conversation = GameObject.Find("Follow").GetComponent<Container>();
+				convo.ResetConversation ();
+				convo.UpdateConversation();
+				convo.EnableConversation ();
+				col.gameObject.GetComponent<Character> ().EnableConversation ();
+				convoOpen = true;
+			}
+			if (col.IsPlayer () && Input.GetKeyDown (KeyCode.G) && convoOpen == true) {
+				convo.LeaveConversation ();
+				convo.ResetConversation ();
+				col.gameObject.GetComponent<Character> ().LeaveConversation ();
+				convo.UpdateConversation();
+				convoOpen = false;
+			}
 			else {
-				if (option == "Bye" && col.IsPlayer()) 
+				if (option == "->" && col.IsPlayer()) 
 				{
 					convo.LeaveConversation ();
 					col.gameObject.GetComponent<Character>().LeaveConversation();
@@ -116,7 +131,8 @@ namespace NPC
 					convoOpen = false;
 					convo.texter = null;
 				}
-				else if (option == "Great!" && col.IsPlayer()) 
+				/*
+				else if (option == "I'll do that." && col.IsPlayer()) 
 				{
 					convo.LeaveConversation ();
 					col.gameObject.GetComponent<Character>().LeaveConversation();
@@ -125,6 +141,16 @@ namespace NPC
 					convoOpen = false;
 					convo.texter = null;
 				}
+				else if (option == "Thanks for the Info!" && col.IsPlayer()) 
+				{
+					convo.LeaveConversation ();
+					col.gameObject.GetComponent<Character>().LeaveConversation();
+					convo.ResetConversation ();
+					convo.UpdateConversation();
+					convoOpen = false;
+					convo.texter = null;
+				}
+				*/
 			}
 			conversationManager ();
 
