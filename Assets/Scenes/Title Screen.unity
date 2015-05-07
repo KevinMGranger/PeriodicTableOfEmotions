@@ -104,10 +104,10 @@ RectTransform:
   - {fileID: 435447477}
   m_Father: {fileID: 535349699}
   m_RootOrder: 5
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 93.3000031, y: 61.5999985}
-  m_SizeDelta: {x: 68, y: 60}
+  m_AnchorMin: {x: .692728519, y: .571833372}
+  m_AnchorMax: {x: .847000062, y: .746357203}
+  m_AnchoredPosition: {x: -.699996948, y: -1.70000076}
+  m_SizeDelta: {x: 0, y: 4}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &19287307
 MonoBehaviour:
@@ -232,7 +232,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 15
     m_FontStyle: 1
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
     m_Alignment: 4
@@ -407,7 +407,7 @@ GameObject:
   - 222: {fileID: 174912220}
   - 114: {fileID: 174912219}
   m_Layer: 5
-  m_Name: Keyboard Button
+  m_Name: Move
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -453,10 +453,10 @@ RectTransform:
   - {fileID: 1027236795}
   m_Father: {fileID: 535349699}
   m_RootOrder: 6
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -3.79999995, y: -6.5}
-  m_SizeDelta: {x: 346.899994, y: 44.5999985}
+  m_AnchorMin: {x: .0977285132, y: .378119081}
+  m_AnchorMax: {x: .87854296, y: .5}
+  m_AnchoredPosition: {x: .300003052, y: 2.60000038}
+  m_SizeDelta: {x: 2.8999939, y: 5.59999847}
   m_Pivot: {x: .5, y: .5}
 --- !u!1 &201029506
 GameObject:
@@ -629,10 +629,10 @@ RectTransform:
   - {fileID: 145082683}
   m_Father: {fileID: 2075089693}
   m_RootOrder: 0
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -1, y: -114.5}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchorMin: {x: .413386732, y: .249271154}
+  m_AnchorMax: {x: .587484419, y: .452305108}
+  m_AnchoredPosition: {x: 0, y: -1}
+  m_SizeDelta: {x: 0, y: 2}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &305272037
 MonoBehaviour:
@@ -892,12 +892,14 @@ RectTransform:
   - {fileID: 174912221}
   - {fileID: 1353560408}
   - {fileID: 1552749506}
+  - {fileID: 2139602094}
+  - {fileID: 2023255999}
   m_Father: {fileID: 2075089693}
   m_RootOrder: 3
-  m_AnchorMin: {x: 0, y: .13059324}
-  m_AnchorMax: {x: .256386757, y: .530169547}
-  m_AnchoredPosition: {x: 786.400024, y: 18.2999992}
-  m_SizeDelta: {x: 134.5, y: 109.5}
+  m_AnchorMin: {x: .61825788, y: .049169492}
+  m_AnchorMax: {x: 1, y: .592694938}
+  m_AnchoredPosition: {x: -1, y: -.575000763}
+  m_SizeDelta: {x: 2, y: -.0699996948}
   m_Pivot: {x: .5, y: .5}
 --- !u!1 &565500469
 GameObject:
@@ -955,10 +957,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2075089693}
   m_RootOrder: 1
-  m_AnchorMin: {x: .299644589, y: .572389841}
-  m_AnchorMax: {x: .68900001, y: .916694939}
-  m_AnchoredPosition: {x: .499984741, y: 48.6500015}
-  m_SizeDelta: {x: -1, y: 1}
+  m_AnchorMin: {x: .299644589, y: .65361017}
+  m_AnchorMax: {x: .68900001, y: 1}
+  m_AnchoredPosition: {x: .499984741, y: .150001526}
+  m_SizeDelta: {x: -1, y: 0}
   m_Pivot: {x: .5, y: .5}
 --- !u!1 &858792529
 GameObject:
@@ -1057,8 +1059,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -3, y: -2}
+  m_SizeDelta: {x: -32, y: -31}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &945353402
 MonoBehaviour:
@@ -1126,10 +1128,10 @@ RectTransform:
   - {fileID: 164102582}
   m_Father: {fileID: 535349699}
   m_RootOrder: 3
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 13.8000002, y: 61.5}
-  m_SizeDelta: {x: 68, y: 60}
+  m_AnchorMin: {x: .511271477, y: .562476218}
+  m_AnchorMax: {x: .663271487, y: .746357203}
+  m_AnchoredPosition: {x: .299999237, y: -.299999237}
+  m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &995663399
 MonoBehaviour:
@@ -1254,10 +1256,10 @@ RectTransform:
   - {fileID: 459948338}
   m_Father: {fileID: 535349699}
   m_RootOrder: 2
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -141.199997, y: 61.5}
-  m_SizeDelta: {x: 68, y: 60}
+  m_AnchorMin: {x: .159457028, y: .571833372}
+  m_AnchorMax: {x: .309271514, y: .746357203}
+  m_AnchoredPosition: {x: .800003052, y: -1.79999924}
+  m_SizeDelta: {x: 2, y: 4}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1053354201
 MonoBehaviour:
@@ -1316,10 +1318,10 @@ RectTransform:
   - {fileID: 201029507}
   m_Father: {fileID: 535349699}
   m_RootOrder: 4
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 14.1000004, y: 131.699997}
-  m_SizeDelta: {x: 68, y: 60}
+  m_AnchorMin: {x: .511271477, y: .78700006}
+  m_AnchorMax: {x: .663271487, y: .965000033}
+  m_AnchoredPosition: {x: -.400001526, y: -2.09999847}
+  m_SizeDelta: {x: 1, y: 3}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1055165983
 MonoBehaviour:
@@ -1444,10 +1446,10 @@ RectTransform:
   - {fileID: 858792530}
   m_Father: {fileID: 535349699}
   m_RootOrder: 1
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -65.1999969, y: 61.5}
-  m_SizeDelta: {x: 68, y: 60}
+  m_AnchorMin: {x: .334185541, y: .571833372}
+  m_AnchorMax: {x: .486000031, y: .746357203}
+  m_AnchoredPosition: {x: -.700000763, y: -1.79999924}
+  m_SizeDelta: {x: 1, y: 4}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1080207990
 MonoBehaviour:
@@ -1487,7 +1489,7 @@ GameObject:
   - 222: {fileID: 1353560410}
   - 114: {fileID: 1353560409}
   m_Layer: 5
-  m_Name: Keyboard Button
+  m_Name: Talk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1506,10 +1508,10 @@ RectTransform:
   - {fileID: 1577263107}
   m_Father: {fileID: 535349699}
   m_RootOrder: 7
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -3.79999995, y: -61.0999985}
-  m_SizeDelta: {x: 346.899994, y: 44.5999985}
+  m_AnchorMin: {x: .214271501, y: .219166651}
+  m_AnchorMax: {x: .87854296, y: .340642869}
+  m_AnchoredPosition: {x: .199996948, y: -1}
+  m_SizeDelta: {x: 3.1000061, y: 5.59999847}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1353560409
 MonoBehaviour:
@@ -1633,7 +1635,7 @@ GameObject:
   - 222: {fileID: 1552749508}
   - 114: {fileID: 1552749507}
   m_Layer: 5
-  m_Name: Keyboard Button
+  m_Name: Follow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1652,10 +1654,10 @@ RectTransform:
   - {fileID: 152923336}
   m_Father: {fileID: 535349699}
   m_RootOrder: 8
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -3.79999995, y: -117.699997}
-  m_SizeDelta: {x: 346.899994, y: 44.5999985}
+  m_AnchorMin: {x: .214271501, y: .031880945}
+  m_AnchorMax: {x: .87854296, y: .169357166}
+  m_AnchoredPosition: {x: .199996948, y: -.100006104}
+  m_SizeDelta: {x: 3.1000061, y: .599998474}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1552749507
 MonoBehaviour:
@@ -1807,11 +1809,72 @@ RectTransform:
   - {fileID: 1074116109}
   m_Father: {fileID: 535349699}
   m_RootOrder: 0
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -65.1999969, y: 131.5}
-  m_SizeDelta: {x: 68, y: 60}
+  m_AnchorMin: {x: .334185541, y: .774523854}
+  m_AnchorMax: {x: .486000031, y: .965000033}
+  m_AnchoredPosition: {x: -.700000763, y: .699996948}
+  m_SizeDelta: {x: 1, y: -1}
   m_Pivot: {x: .5, y: .5}
+--- !u!1 &2023255998
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 2023255999}
+  - 222: {fileID: 2023256001}
+  - 114: {fileID: 2023256000}
+  m_Layer: 5
+  m_Name: 'Tawk Bubba: Exclaim'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2023255999
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2023255998}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 535349699}
+  m_RootOrder: 10
+  m_AnchorMin: {x: .0977285132, y: .031880945}
+  m_AnchorMax: {x: .205271497, y: .169357166}
+  m_AnchoredPosition: {x: -.5, y: -.100006104}
+  m_SizeDelta: {x: 1.30000305, y: .599998474}
+  m_Pivot: {x: .5, y: .5}
+--- !u!114 &2023256000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2023255998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 52732e0389c67694ebca73920bf1e4c5, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &2023256001
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2023255998}
 --- !u!1 &2075089692
 GameObject:
   m_ObjectHideFlags: 0
@@ -1844,7 +1907,6 @@ RectTransform:
   - {fileID: 565500472}
   - {fileID: 144318529}
   - {fileID: 535349699}
-  - {fileID: 2139602094}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}
@@ -1917,7 +1979,7 @@ GameObject:
   - 222: {fileID: 2139602096}
   - 114: {fileID: 2139602095}
   m_Layer: 5
-  m_Name: Image
+  m_Name: 'Tawk Bubba: Ellipsis'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1933,12 +1995,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2075089693}
-  m_RootOrder: 4
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 182.020264, y: -41.2809296}
-  m_SizeDelta: {x: 100, y: 100}
+  m_Father: {fileID: 535349699}
+  m_RootOrder: 9
+  m_AnchorMin: {x: .0977285132, y: .219166651}
+  m_AnchorMax: {x: .205271497, y: .340642869}
+  m_AnchoredPosition: {x: -.5, y: -1}
+  m_SizeDelta: {x: 1.30000305, y: 5.59999847}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &2139602095
 MonoBehaviour:
@@ -1953,7 +2015,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 41cd628c9eb73a8449dbad6251f49c70, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
