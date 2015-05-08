@@ -2,17 +2,18 @@
 using UnityEngine.Events;
 using System.Collections;
 
+
 namespace NPC
 {
 
 	public class MoveNPC : MonoBehaviour
 	{
 		public Character player;
-
 		// a bool meant to control the event's invoke. 
 		public bool isMoving = false;
 		public bool playerHere = false;
 		public bool isMatched = false;
+
 
 		[ContextMenu("Is the object following the player?")]
 		public UnityEvent followMe;
@@ -61,11 +62,12 @@ namespace NPC
 		public void followPlayer()
 		{
 			// This object's parent is the player.
-			if((Vector3.Distance(this.transform.position, player.gameObject.transform.position)) > 3.0f)
+			if((Vector3.Distance(this.transform.position, player.gameObject.transform.position)) > 1.5f)
 			{
 				Quaternion startingRotation = transform.rotation;
 				transform.LookAt(player.transform.position);
 				transform.Translate(Vector3.forward * 0.1f);
+				//transform.position.y += Vector3.forward.y * 0.1f;
 				transform.rotation = startingRotation;
 			}
 		}
@@ -75,6 +77,7 @@ namespace NPC
 			if (Input.GetKeyDown(KeyCode.F) && !isMoving && playerHere && !isMatched && this.gameObject.GetComponent<AtomNPC>().sentiment == Sentiment.Trusting) 
 			{
 				isMoving = true;
+
 			}
 			// if the G key is pressed, the player will release the object.
 			else if (Input.GetKeyDown(KeyCode.G) && isMoving == true || isMatched)
