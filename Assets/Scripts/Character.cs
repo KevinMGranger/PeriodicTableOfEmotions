@@ -44,12 +44,18 @@ public class Character : MonoBehaviour
 		playerState = PlayerState.walking;
 		matchingState = MatchingState.notMatching;
 
+        Screen.lockCursor = true;
+        Screen.showCursor = false;
+
+
         this.CheckComponent(ref ml);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
+
 		if(tryGrab)
 		{
 			tryGrab = false;
@@ -108,11 +114,15 @@ public class Character : MonoBehaviour
 
     public void EnableConversation()
     {
+        Screen.lockCursor = false;
+        Screen.showCursor = true;
         ml.enabled = false;
     }
 
     public void LeaveConversation()
     {
+        Screen.lockCursor = true;
+        Screen.showCursor = false;
         ml.enabled = true;
     }
 }
