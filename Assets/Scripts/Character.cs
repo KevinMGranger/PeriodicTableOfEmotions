@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 // Tracks the player's current state
@@ -37,6 +38,11 @@ public class Character : MonoBehaviour
 	public MatchingState matchingState;
 
     MouseLook ml;
+
+    #region UI Feedback
+    public Canvas buttonUI;
+    public Text whatToPress;
+    #endregion
 
     // Use this for initialization
     void Start()
@@ -108,11 +114,45 @@ public class Character : MonoBehaviour
 
     public void EnableConversation()
     {
+        buttonUI.enabled = false;
         ml.enabled = false;
     }
 
     public void LeaveConversation()
     {
         ml.enabled = true;
+    }
+
+    public void setupUI(NPC.Sentiment sentiment)
+    {
+        buttonUI.enabled = true;
+        switch (sentiment)
+        {
+            case NPC.Sentiment.NeverMet:
+            case NPC.Sentiment.Met:
+                whatToPress.text = "Press E to talk";
+                break;
+            case NPC.Sentiment.Trusting:
+                whatToPress.text = "Press F to have follow";
+                break;
+        }
+    }
+
+    public void startFollowing()
+    {
+        buttonUI.enabled = true;
+        whatToPress.text = "Press G to stop following";
+
+    }
+
+    public void stopFollowing()
+    {
+        buttonUI.enabled = true;
+        whatToPress.text = "Press F to have follow";
+    }
+
+    public void teardownUI()
+    {
+        buttonUI.enabled = false;
     }
 }
