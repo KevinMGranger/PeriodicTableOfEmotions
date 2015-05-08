@@ -5,7 +5,6 @@ using System.Collections;
 
 namespace NPC
 {
-
 	public class MoveNPC : MonoBehaviour
 	{
 		public Character player;
@@ -77,12 +76,13 @@ namespace NPC
 			if (Input.GetKeyDown(KeyCode.F) && !isMoving && playerHere && !isMatched && this.gameObject.GetComponent<AtomNPC>().sentiment == Sentiment.Trusting) 
 			{
 				isMoving = true;
-
+                player.startFollowing();
 			}
 			// if the G key is pressed, the player will release the object.
 			else if (Input.GetKeyDown(KeyCode.G) && isMoving == true || isMatched)
 			{
 				isMoving = false;
+                player.stopFollowing();
 			}
 			// This will invoke the event as long as the player pressed the F key. 
 			if (isMoving == true)

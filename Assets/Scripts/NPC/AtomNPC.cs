@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 using System;
 using Conversation;
@@ -97,6 +98,7 @@ namespace NPC
             if (col.IsPlayer())
             {
                 sbc.gameObject.SetActive(true);
+                col.GetComponent<Character>().setupUI(sentiment);
             }
         }
 
@@ -162,13 +164,18 @@ namespace NPC
 
         void OnTriggerExit(Collider col)
         {
-			if (col.IsPlayer () && convoOpen == true) {
-				convo.LeaveConversation ();
-				convo.ResetConversation ();
-				col.gameObject.GetComponent<Character> ().LeaveConversation ();
-				convo.UpdateConversation();
-				convoOpen = false;
-			}
+            if (col.IsPlayer())
+            {
+                col.GetComponent<Character>().teardownUI();
+                if (convoOpen == true)
+                {
+                    convo.LeaveConversation();
+                    convo.ResetConversation();
+                    col.gameObject.GetComponent<Character>().LeaveConversation();
+                    convo.UpdateConversation();
+                    convoOpen = false;
+                }
+            }
 			if(state != State.InLove)
 			{
 				sbc.gameObject.SetActive (false);
